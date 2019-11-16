@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -33,7 +33,25 @@
   <ItemGroup>
     <None Remove="Controls\MaskedTextBox.xaml" />
     <None Remove="Controls\NumberUpDown.xaml" />
+    <None Remove="Resources\btn_bg.png" />
+    <None Remove="Resources\close.png" />
+    <None Remove="Resources\delay.png" />
+    <None Remove="Resources\icon_arrow_left.png" />
+    <None Remove="Resources\login_bg.png" />
+    <None Remove="Resources\logo.png" />
+    <None Remove="Resources\loss.png" />
+    <None Remove="Resources\me.png" />
+    <None Remove="Resources\me_disable.png" />
+    <None Remove="Resources\me_logo.png" />
+    <None Remove="Resources\mini.png" />
+    <None Remove="Resources\right_arrow.png" />
+    <None Remove="Resources\speed.png" />
+    <None Remove="Resources\speed_disable.png" />
     <None Remove="Resources\ssw128.png" />
+    <None Remove="Resources\suo.png" />
+    <None Remove="Resources\tab_bg.png" />
+    <None Remove="Resources\tisheng.png" />
+    <None Remove="Resources\youxiang.png" />
     <None Remove="View\ConfigWindow.xaml" />
     <None Remove="View\LogWindow.xaml" />
     <None Remove="View\PortSettingsWindow.xaml" />
@@ -45,6 +63,24 @@
   
   <ItemGroup>
     <Resource Include="..\pic\wechat.jpg" Link="Resources\wechat.jpg" />
+    <Resource Include="Resources\btn_bg.png" />
+    <Resource Include="Resources\close.png" />
+    <Resource Include="Resources\delay.png" />
+    <Resource Include="Resources\icon_arrow_left.png" />
+    <Resource Include="Resources\login_bg.png" />
+    <Resource Include="Resources\logo.png" />
+    <Resource Include="Resources\loss.png" />
+    <Resource Include="Resources\me.png" />
+    <Resource Include="Resources\me_disable.png" />
+    <Resource Include="Resources\me_logo.png" />
+    <Resource Include="Resources\mini.png" />
+    <Resource Include="Resources\right_arrow.png" />
+    <Resource Include="Resources\speed.png" />
+    <Resource Include="Resources\speed_disable.png" />
+    <Resource Include="Resources\suo.png" />
+    <Resource Include="Resources\tab_bg.png" />
+    <Resource Include="Resources\tisheng.png" />
+    <Resource Include="Resources\youxiang.png" />
   </ItemGroup>
   
   <ItemGroup>

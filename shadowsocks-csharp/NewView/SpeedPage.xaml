@@ -1,0 +1,107 @@
+﻿<Page x:Class="Shadowsocks.NewView.SpeedPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Shadowsocks.NewView"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="620"
+      Title="SpeedPage">
+
+    <StackPanel>
+        <StackPanel Margin="0 10 0 0" HorizontalAlignment="Center">
+            <Image Source="/Resources/me_logo.png" Width="140" Height="140" />
+        </StackPanel>
+        <Grid Margin="15 21 15 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="/Resources/delay.png" Height="21" Width="21" />
+                    <TextBlock FontSize="14" FontFamily="PingFangSC-Regular" Foreground="#fff" Margin="10 1 0 0" VerticalAlignment="Center">
+                        网络延迟
+                    </TextBlock>
+                </StackPanel>
+
+                <TextBlock FontSize="14" Foreground="#658FF1" HorizontalAlignment="Center" Margin="0 12 0 0">
+                    100
+                </TextBlock>
+
+                <TextBlock FontSize="14" Foreground="#fff" HorizontalAlignment="Center" Margin="0 12 0 0">
+                    %
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="/Resources/loss.png" Height="21" Width="21" />
+                    <TextBlock FontSize="14" FontFamily="PingFangSC-Regular" Foreground="#fff" Margin="10 1 0 0" VerticalAlignment="Center">
+                        网络丢包
+                    </TextBlock>
+                </StackPanel>
+
+                <TextBlock FontSize="14" Foreground="#658FF1" HorizontalAlignment="Center" Margin="0 12 0 0">
+                    100
+                </TextBlock>
+
+                <TextBlock FontSize="14" Foreground="#fff" HorizontalAlignment="Center" Margin="0 12 0 0">
+                    %
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="/Resources/tisheng.png" Height="21" Width="21" />
+                    <TextBlock FontSize="14" FontFamily="PingFangSC-Regular" Foreground="#fff" Margin="10 1 0 0" VerticalAlignment="Center">
+                        综合提升
+                    </TextBlock>
+                </StackPanel>
+
+                <TextBlock FontSize="14" Foreground="#658FF1" HorizontalAlignment="Center" Margin="0 12 0 0">
+                    100
+                </TextBlock>
+
+                <TextBlock FontSize="14" Foreground="#fff" HorizontalAlignment="Center" Margin="0 12 0 0">
+                    %
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <Border CornerRadius="10" BorderBrush="#000" Margin="0 18 0 0" Width="438" Height="51" Background="#fff">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                <StackPanel VerticalAlignment="Center" Width="100">
+                    <TextBlock VerticalAlignment="Center" Margin="39 0 0 0" FontSize="14" Foreground="#333333">
+                        请选择
+                    </TextBlock>
+                </StackPanel>
+
+                <TextBlock Grid.Column="1" FontSize="14" Foreground="#333" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    单端口
+                </TextBlock>
+
+                <DockPanel Grid.Column="2" Width="100" HorizontalAlignment="Right">
+                    <Image Margin="0 0 24 0" Source="/Resources/right_arrow.png" Height="17" Width="10" HorizontalAlignment="Right"/>
+                </DockPanel>
+            </Grid>
+        </Border>
+
+        <StackPanel Height="68" Width="407" Margin="0 18 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel.Background>
+                <ImageBrush ImageSource="/Resources/btn_bg.png" />
+            </StackPanel.Background>
+
+            <TextBlock Foreground="#fff" FontSize="20" FontFamily="PingFangSC-Regular" HorizontalAlignment="Center" Margin="0 24 0 0">
+                    开始加速
+            </TextBlock>
+        </StackPanel>
+    </StackPanel>
+</Page>

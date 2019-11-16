@@ -9,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using System.Threading.Tasks; 
 using System.Windows;
 
 namespace Shadowsocks.Controller
@@ -45,6 +45,11 @@ namespace Shadowsocks.Controller
         //public event EventHandler ShareOverLANStatusChanged;
         public event EventHandler ShowConfigFormEvent;
         public event EventHandler ShowSubscribeWindowEvent;
+
+
+        // add by alex
+        public event EventHandler ShowLoginScreenEvent;
+        public event EventHandler ShowMainScreenEvent;
 
         // when user clicked Edit PAC, and PAC file has already created
         public event EventHandler<PathEventArgs> PACFileReadyToOpen;
@@ -543,6 +548,16 @@ namespace Shadowsocks.Controller
         public void ShowSubscribeWindow()
         {
             ShowSubscribeWindowEvent?.Invoke(default, default);
+        }
+
+        public void ShowLoginScreen()
+        {
+            ShowLoginScreenEvent?.Invoke(default, default);
+        }
+
+        public void ShowMainScreen()
+        {
+            ShowMainScreenEvent?.Invoke(default, default);
         }
 
         /// <summary>

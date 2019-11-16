@@ -19,6 +19,7 @@ using System.Windows.Input;
 using System.Windows.Shapes;
 using Brushes = System.Windows.Media.Brushes;
 using Rectangle = System.Drawing.Rectangle;
+using Shadowsocks.NewView;
 
 namespace Shadowsocks.Controller
 {
@@ -71,6 +72,9 @@ namespace Shadowsocks.Controller
         private ConfigWindow _configWindow;
         private SettingsWindow _settingsWindow;
 
+        private LoginScreen _loginScreen;
+        private MainScreen _mainScreen;
+
         #region ServerLogWindow
 
         private ServerLogWindow _serverLogWindow;
@@ -85,6 +89,8 @@ namespace Shadowsocks.Controller
         private System.Timers.Timer timerDelayCheckUpdate;
 
         private bool configFrom_open;
+        private bool loginScreen_open;
+        private bool mainScreen_open;
         private readonly List<EventParams> eventList = new List<EventParams>();
 
         public MenuViewController(ShadowsocksController controller)
@@ -104,6 +110,8 @@ namespace Shadowsocks.Controller
             controller.UpdatePACFromGFWListError += controller_UpdatePACFromGFWListError;
             controller.ShowConfigFormEvent += Config_Click;
             controller.ShowSubscribeWindowEvent += Controller_ShowSubscribeWindowEvent;
+            controller.ShowLoginScreenEvent += Login_Click;
+            controller.ShowMainScreenEvent += Main_Click;
 
             _notifyIcon = new TaskbarIcon();
             UpdateTrayIcon();
@@ -767,6 +775,82 @@ namespace Shadowsocks.Controller
             }
         }
 
+        private void ShowLoginScreen()
+        {
+            if (_loginScreen != null)
+            {
+                _loginScreen.Activate();
+                _loginScreen.UpdateLayout();
+                if (_loginScreen.WindowState == WindowState.Minimized)
+                {
+                    _loginScreen.WindowState = WindowState.Normal;
+                }
+            } 
+            else
+            {
+                loginScreen_open = true;
+                _loginScreen = new LoginScreen(controller);
+                _loginScreen.Show();
+                _loginScreen.Activate();
+                _loginScreen.BringToFront();
+                _loginScreen.Closed += _loginScreen_Closed;
+            }
+        }
+
+        private void _loginScreen_Closed(object sender, EventArgs e)
+        {
+            _loginScreen = null;
+            loginScreen_open = false;
+            Utils.ReleaseMemory();
+            if (eventList.Count > 0)
+            {
+                foreach (var p in eventList)
+                {
+                    UpdateNodeCheckerNewNodeFound(p.sender, p.e);
+                }
+
+                eventList.Clear();
+            }
+        }
+
+        private void ShowMainScreen()
+        {
+            if (_mainScreen != null)
+            {
+                _mainScreen.Activate();
+                _mainScreen.UpdateLayout();
+                if (_mainScreen.WindowState == WindowState.Minimized)
+                {
+                    _mainScreen.WindowState = WindowState.Normal;
+                }
+            }
+            else
+            {
+                mainScreen_open = true;
+                _mainScreen = new MainScreen();
+                _mainScreen.Show();
+                _mainScreen.Activate();
+                _mainScreen.BringToFront();
+                _mainScreen.Closed += _mainScreen_Closed;
+            }
+        }
+
+        private void _mainScreen_Closed(object sender, EventArgs e)
+        {
+            _mainScreen = null;
+            mainScreen_open = false;
+            Utils.ReleaseMemory();
+            if (eventList.Count > 0)
+            {
+                foreach (var p in eventList)
+                {
+                    UpdateNodeCheckerNewNodeFound(p.sender, p.e);
+                }
+
+                eventList.Clear();
+            }
+        }
+
         private void ConfigWindow_Closed(object sender, EventArgs e)
         {
             _configWindow = null;
@@ -937,6 +1021,30 @@ namespace Shadowsocks.Controller
             else
             {
                 ShowConfigForm(false);
+            }
+        }
+
+        private void Login_Click(object sender, EventArgs e)
+        {
+            if (sender is int i)
+            {
+                // ShowLoginScreen(i);
+            }
+            else
+            {
+                ShowLoginScreen();
+            }
+        }
+
+        private void Main_Click(object sender, EventArgs e)
+        {
+            if (sender is int i)
+            {
+
+            }
+            else
+            {
+                ShowMainScreen();
             }
         }
 
