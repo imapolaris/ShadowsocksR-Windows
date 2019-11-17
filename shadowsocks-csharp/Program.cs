@@ -79,7 +79,7 @@ namespace Shadowsocks
                 {
                     case MessageBoxResult.Yes:
                     {
-                        _controller.ShowMainScreen();
+                        _controller.ShowLoginScreen();
                         break;
                     }
                     case MessageBoxResult.No:
