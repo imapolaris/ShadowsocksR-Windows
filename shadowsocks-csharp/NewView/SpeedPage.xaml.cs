@@ -22,5 +22,10 @@ namespace Shadowsocks.NewView
         {
             InitializeComponent();
         }
+
+        private void onSpeedButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/NewView/TracePage.xaml", UriKind.Relative));
+        }
     }
 }

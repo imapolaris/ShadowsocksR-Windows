@@ -112,8 +112,10 @@ namespace Shadowsocks.NewView
             bool rememberMe = this.RememberPassword;
             bool isLogin = this.IsLogin;
 
-            MessageBox.Show("" + email + ":" + pwd + ", " + autoLogin.ToString() + ", " + rememberMe.ToString() + ", " + isLogin.ToString());
+            // MessageBox.Show("" + email + ":" + pwd + ", " + autoLogin.ToString() + ", " + rememberMe.ToString() + ", " + isLogin.ToString());
 
+            this.Hide();
+            _controller?.ShowMainScreen();
         }
 
         // 去登录

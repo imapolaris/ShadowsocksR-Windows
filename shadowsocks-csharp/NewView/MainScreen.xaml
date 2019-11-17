@@ -25,18 +25,62 @@
             </StackPanel>
 
             <StackPanel Margin="0 13 0 0">
-                <StackPanel Orientation="Horizontal" Width="120" Height="65">
-                    <Image Source="/Resources/speed.png" Width="25" Height="30" Margin="25 0 0 0"  />
-                    <TextBlock Foreground="#8A899A" FontSize="14" VerticalAlignment="Center" Margin="18 0 0 0">
-                        加速
-                    </TextBlock>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Width="120" Height="65">
-                    <Image Source="/Resources/me.png" Width="25" Height="30" Margin="25 0 0 0"  />
-                    <TextBlock Foreground="#8A899A" FontSize="14" VerticalAlignment="Center" Margin="18 0 0 0">
-                        我的
-                    </TextBlock>
-                </StackPanel>
+                <Button Click="onSpeedButton_Click" Background="{Binding SpeedTabBackground, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Foreground="{Binding SpeedTabForeground, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <StackPanel Orientation="Horizontal" Width="120" Height="65">
+                                            <StackPanel.Background>
+                                                <ImageBrush ImageSource="/Resources/tab_bg.png" />
+                                            </StackPanel.Background>
+                                            <Image Source="/Resources/speed.png" Width="25" Height="30" Margin="25 0 0 0"  />
+                                            <TextBlock Foreground="#fff" FontSize="14" VerticalAlignment="Center" Margin="18 0 0 0">
+                                                加速
+                                            </TextBlock>
+                                        </StackPanel>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Opacity" Value="0.6"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Opacity" Value="0.8"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Click="onMeButton_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <StackPanel Orientation="Horizontal" Width="120" Height="65">
+                                            <Image Source="/Resources/me_disable.png" Width="25" Height="30" Margin="25 0 0 0"  />
+                                            <TextBlock Foreground="#8A899A" FontSize="14" VerticalAlignment="Center" Margin="18 0 0 0">
+                                                我的
+                                            </TextBlock>
+                                        </StackPanel>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Opacity" Value="0.6"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Opacity" Value="0.8"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </StackPanel>
         </StackPanel>
 

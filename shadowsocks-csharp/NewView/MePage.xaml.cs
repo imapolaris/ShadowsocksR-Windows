@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shadowsocks.Controller;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -21,6 +22,11 @@ namespace Shadowsocks.NewView
         public MePage()
         {
             InitializeComponent();
+        }
+
+        private void onLogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

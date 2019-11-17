@@ -94,14 +94,34 @@
             </Grid>
         </Border>
 
-        <StackPanel Height="68" Width="407" Margin="0 18 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <StackPanel.Background>
-                <ImageBrush ImageSource="/Resources/btn_bg.png" />
-            </StackPanel.Background>
+        <Button Click="onSpeedButton_Click">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <StackPanel Height="68" Width="407" Margin="0 18 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <StackPanel.Background>
+                                        <ImageBrush ImageSource="/Resources/btn_bg.png" />
+                                    </StackPanel.Background>
 
-            <TextBlock Foreground="#fff" FontSize="20" FontFamily="PingFangSC-Regular" HorizontalAlignment="Center" Margin="0 24 0 0">
-                    开始加速
-            </TextBlock>
-        </StackPanel>
+                                    <TextBlock Foreground="#fff" FontSize="20" FontFamily="PingFangSC-Regular" HorizontalAlignment="Center" Margin="0 24 0 0">
+                                        开始加速
+                                    </TextBlock>
+                                </StackPanel>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.6"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="Opacity" Value="0.8"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
     </StackPanel>
 </Page>

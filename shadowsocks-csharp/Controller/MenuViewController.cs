@@ -827,7 +827,7 @@ namespace Shadowsocks.Controller
             else
             {
                 mainScreen_open = true;
-                _mainScreen = new MainScreen();
+                _mainScreen = new MainScreen(controller);
                 _mainScreen.Show();
                 _mainScreen.Activate();
                 _mainScreen.BringToFront();
