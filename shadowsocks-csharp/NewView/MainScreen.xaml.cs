@@ -34,17 +34,46 @@ namespace Shadowsocks.NewView
             set => SetValue(SpeedTabBackgroundProperty, value);
         }
         public static readonly DependencyProperty SpeedTabBackgroundProperty = DependencyProperty.Register(@"SpeedTabBackground", typeof(ImageBrush), typeof(MainScreen));
-        public string SpeedTabForeground
+        public Brush SpeedTabForeground
         {
-            get => GetValue(SpeedTabForegroundProperty) as string;
+            get => GetValue(SpeedTabForegroundProperty) as Brush;
             set => SetValue(SpeedTabForegroundProperty, value);
         }
-        public static readonly DependencyProperty SpeedTabForegroundProperty = DependencyProperty.Register(@"SpeedTabForeground", typeof(string), typeof(MainScreen));
+        public static readonly DependencyProperty SpeedTabForegroundProperty = DependencyProperty.Register(@"SpeedTabForeground", typeof(Brush), typeof(MainScreen));
+
+
+        public ImageBrush MeTabBackground
+        {
+            get => GetValue(MeTabBackgroundProperty) as ImageBrush;
+            set => SetValue(MeTabBackgroundProperty, value);
+        }
+        public static readonly DependencyProperty MeTabBackgroundProperty = DependencyProperty.Register(@"MeTabBackground", typeof(ImageBrush), typeof(MainScreen));
+        public Brush MeTabForeground
+        {
+            get => GetValue(MeTabForegroundProperty) as Brush;
+            set => SetValue(MeTabForegroundProperty, value);
+        }
+        public static readonly DependencyProperty MeTabForegroundProperty = DependencyProperty.Register(@"MeTabForeground", typeof(Brush), typeof(MainScreen));
+
+        public ImageBrush SpeedTabIcon
+        {
+            get => GetValue(SpeedTabIconProperty) as ImageBrush;
+            set => SetValue(SpeedTabIconProperty, value);
+        }
+        public static readonly DependencyProperty SpeedTabIconProperty = DependencyProperty.Register(@"SpeedTabIcon", typeof(ImageBrush), typeof(MainScreen));
+        public ImageBrush MeTabIcon
+        {
+            get => GetValue(MeTabIconProperty) as ImageBrush;
+            set => SetValue(MeTabIconProperty, value);
+        }
+        public static readonly DependencyProperty MeTabIconProperty = DependencyProperty.Register(@"MeTabIcon", typeof(ImageBrush), typeof(MainScreen));
 
 
         public MainScreen(ShadowsocksController controller)
         {
             InitializeComponent();
+
+            this.DataContext = this;
 
             this._controller = controller;
 
@@ -79,17 +108,31 @@ namespace Shadowsocks.NewView
         {
             if (tabIndex == 0)
             {
-                this.SpeedTabForeground = "#fff";
+                this.SpeedTabForeground = new SolidColorBrush(Color.FromRgb((byte)255, (byte)255, (byte)255));
                 ImageBrush imageBrush = new ImageBrush();
-                Uri uri = new Uri("/Resources/tab_bg.png", UriKind.Relative);
+                Uri uri = new Uri("pack://application:,,,/Resources/tab_bg.png", UriKind.Absolute);
                 imageBrush.ImageSource = new BitmapImage(uri);
                 this.SpeedTabBackground = imageBrush;
 
+                this.SpeedTabIcon = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/Resources/speed.png", UriKind.Absolute)));
+                this.MeTabIcon = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/Resources/me_disable.png", UriKind.Absolute)));
+
+                this.MeTabForeground = new SolidColorBrush(Color.FromRgb((byte)138, (byte)137, (byte)154)); // #8A899A
+                this.MeTabBackground = null;
             } 
             else if (tabIndex == 1)
             {
-                this.SpeedTabForeground = "#8A899A";
+                this.SpeedTabForeground = new SolidColorBrush(Color.FromRgb((byte)138, (byte)137, (byte)154)); // #8A899A
                 this.SpeedTabBackground = null;
+
+                this.MeTabForeground = new SolidColorBrush(Color.FromRgb((byte)255, (byte)255, (byte)255));
+                ImageBrush imageBrush = new ImageBrush();
+                Uri uri = new Uri("pack://application:,,,/Resources/tab_bg.png", UriKind.Absolute);
+                imageBrush.ImageSource = new BitmapImage(uri);
+                this.MeTabBackground = imageBrush;
+
+                this.SpeedTabIcon = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/Resources/speed_disable.png", UriKind.Absolute)));
+                this.MeTabIcon = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/Resources/me.png", UriKind.Absolute)));
             }
         }
     }
