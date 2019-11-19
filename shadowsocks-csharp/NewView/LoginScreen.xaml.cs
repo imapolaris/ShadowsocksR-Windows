@@ -10,6 +10,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Shadowsocks.Controller;
+using Newtonsoft.Json;
+using Shadowsocks.NewModel;
+using Newtonsoft.Json.Linq;
 
 namespace Shadowsocks.NewView
 {
@@ -113,9 +116,86 @@ namespace Shadowsocks.NewView
             bool isLogin = this.IsLogin;
 
             // MessageBox.Show("" + email + ":" + pwd + ", " + autoLogin.ToString() + ", " + rememberMe.ToString() + ", " + isLogin.ToString());
+            if (isLogin)
+            {
+                try
+                {
+                    var res = login(email, pwd);
+                    if (res != null)
+                    {
+                        JObject jObject = JObject.Parse(res);
+                        int ret = (int)jObject["ret"];
+                        if (ret == 1)
+                        {
+                            JObject data = jObject["data"] as JObject;
+                            CurrentUser.IsLogined = true;
+                            CurrentUser.User_Id = (string)data["user_id"];
+                            CurrentUser.Token = (string)data["token"];
 
-            this.Hide();
-            _controller?.ShowMainScreen();
+                            // 登录成功
+                            Close();
+                            _controller?.ShowMainScreen();
+                        }
+                        else
+                        {
+                            MessageBox.Show("登录失败，请检查输入信息是否正确！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("登录失败，请检查输入信息是否正确！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("登录失败，请检查输入信息是否正确！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                var res = register(email, pwd);
+                if (res != null)
+                {
+                    JObject jObject = JObject.Parse(res);
+                    int ret = (int)jObject["ret"];
+                    if (ret == 1)
+                    {
+                        MessageBox.Show("注册成功！正在进入登录界面", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                        onToLoginButton_Click(null, null);
+                    }
+                    else
+                    {
+                        MessageBox.Show("注册失败！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("注册失败！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        // 登录
+        private string login(string email, string pwd)
+        {
+            string url = "http://ss.yam.im/api/token";
+            string json = "{" + "\"email\":\"" + email + "\", \"passwd\":\"" + pwd + "\"}";
+            return WebHelper.Post(url, json);
+        }
+
+        // 注册
+        private string register(string email, string pwd)
+        {
+            string url = "http://ss.yam.im/api/user/register";
+            string json = "{" + "\"email\":\"" + email
+                + "\", \"passwd\":\"" + pwd
+                + "\", \"repasswd\":\"" + pwd
+                + "\", \"imtype\":1"
+                + ", \"name\":\"" + email
+                + "\", \"code\":1"
+                + ", \"wechat\":\"" + Guid.NewGuid().ToString() + "\"}";
+            return WebHelper.Post(url, json);
         }
 
         // 去登录
