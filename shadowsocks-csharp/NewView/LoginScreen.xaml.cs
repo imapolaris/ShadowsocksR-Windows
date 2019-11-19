@@ -13,6 +13,7 @@ using Shadowsocks.Controller;
 using Newtonsoft.Json;
 using Shadowsocks.NewModel;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace Shadowsocks.NewView
 {
@@ -132,6 +133,16 @@ namespace Shadowsocks.NewView
                             CurrentUser.User_Id = (string)data["user_id"];
                             CurrentUser.Token = (string)data["token"];
 
+                            if (rememberMe || autoLogin)
+                            {
+                                string content = email + "," + pwd + "," + (rememberMe ? 1 : 0) + "," + (autoLogin ? 1 : 0);
+                                writeFile(content);
+                            }
+                            else
+                            {
+                                writeFile("");
+                            }
+
                             // 登录成功
                             Close();
                             _controller?.ShowMainScreen();
@@ -235,6 +246,101 @@ namespace Shadowsocks.NewView
                     this.DragMove();
                 }
             };
+
+            init();
+        }
+
+        private void init()
+        {
+            // 格式：用户名，密码，记住密码-0|1，自动登录-0|1
+            string content = readFile();
+            Console.WriteLine(content);
+            string[] str = content.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            if (str == null || str.Length < 4)
+                return;
+            else
+            {
+                this.Email = str[0];
+                this.Password = str[1];
+                this.RememberPassword = int.Parse(str[2]) == 1;
+                this.AutoLogin = int.Parse(str[3]) == 1;
+            }
+        }
+
+        private const string fileName = "appconfig";
+        private string readFile()
+        {
+            try
+            {
+                if (File.Exists(fileName))
+                {
+                    Console.WriteLine("file exists");
+
+                    string str = "";
+                    using (StreamReader sr = new StreamReader(fileName, Encoding.Default))
+                    {
+                        int lineCount = 0;
+                        while (sr.Peek() > 0)
+                        {
+                            lineCount++;
+                            string temp = sr.ReadLine();
+                            str += temp;
+                        }
+                    }
+                    return str;
+                }
+                else
+                {
+                    Console.WriteLine("file not exists");
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        private void writeFile(string content)
+        {
+            try
+            {
+                Byte[] bytes = Encoding.UTF8.GetBytes(content);
+                /*string str = "";
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    str += bytes[i].ToString();
+                }*/
+                using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))
+                {
+                    using (StreamWriter sw = new StreamWriter(fs, Encoding.Default))
+                    {
+                        sw.WriteLine(content);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+        }
+
+        private void autoLoginCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (this.AutoLogin)
+            {
+                this.RememberPassword = true;
+            }
+        }
+
+        private void rememberMeCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (!this.RememberPassword)
+            {
+                this.AutoLogin = false;
+            }
         }
     }
 }

@@ -89,8 +89,8 @@
 
             <StackPanel Margin="0 39 0 0">
                 <StackPanel Orientation="Horizontal" Margin="40 0 0 0" Visibility="{Binding IsLogin, Converter={StaticResource visibilityConverter2}}">
-                    <CheckBox Foreground="#7A7D8F" Margin="10 0 0 0" BorderBrush="#54546B" IsChecked="{Binding RememberPassword, Mode=TwoWay}">记住密码</CheckBox>
-                    <CheckBox Foreground="#7A7D8F" Margin="60 0 0 0" BorderBrush="#54546B" IsChecked="{Binding AutoLogin, Mode=TwoWay}">自动登录</CheckBox>
+                    <CheckBox Foreground="#7A7D8F" Margin="10 0 0 0" BorderBrush="#54546B" IsChecked="{Binding RememberPassword, Mode=TwoWay}" Unchecked="rememberMeCheckBox_Unchecked">记住密码</CheckBox>
+                    <CheckBox Foreground="#7A7D8F" Margin="60 0 0 0" BorderBrush="#54546B" IsChecked="{Binding AutoLogin, Mode=TwoWay}" Checked="autoLoginCheckBox_Checked">自动登录</CheckBox>
                 </StackPanel>
                 <Button Click="onLoginButton_Click">
                     <Button.Style>

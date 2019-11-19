@@ -128,6 +128,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="appconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <Page Update="I18N\SettingsWindow.en-US.xaml">
       <SubType>Designer</SubType>
     </Page>
