@@ -6,17 +6,18 @@
       xmlns:local="clr-namespace:Shadowsocks.NewView"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      Loaded="Page_Loaded"
       Title="MePage">
 
     <Grid>
         <StackPanel HorizontalAlignment="Center">
             <Image Source="/Resources/me_logo.png" Height="65" Width="65" Margin="0 55 0 0" />
 
-            <TextBlock Margin="0 29 0 0" FontSize="16" FontFamily="PingFangSC-Regular" Foreground="#fff" HorizontalAlignment="Center">
+            <TextBlock x:Name="loginUser" Margin="0 29 0 0" FontSize="16" FontFamily="PingFangSC-Regular" Foreground="#fff" HorizontalAlignment="Center">
                 alex@gmail.com
             </TextBlock>
 
-            <TextBlock Margin="0 14 0 0" FontSize="16" FontFamily="PingFangSC-Regular" Foreground="#fff" HorizontalAlignment="Center">
+            <TextBlock x:Name="loginDate" Margin="0 14 0 0" FontSize="16" FontFamily="PingFangSC-Regular" Foreground="#fff" HorizontalAlignment="Center">
                 2019-11-02 20:30:14
             </TextBlock>
 

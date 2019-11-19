@@ -132,6 +132,8 @@ namespace Shadowsocks.NewView
                             CurrentUser.IsLogined = true;
                             CurrentUser.User_Id = (string)data["user_id"];
                             CurrentUser.Token = (string)data["token"];
+                            CurrentUser.LoginDate = DateTime.Now;
+                            CurrentUser.Email = Email;
 
                             if (rememberMe || autoLogin)
                             {
@@ -312,7 +314,7 @@ namespace Shadowsocks.NewView
                 {
                     str += bytes[i].ToString();
                 }*/
-                using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))
+                using (FileStream fs = new FileStream(fileName, FileMode.Create))
                 {
                     using (StreamWriter sw = new StreamWriter(fs, Encoding.Default))
                     {
