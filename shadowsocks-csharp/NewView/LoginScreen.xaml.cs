@@ -143,7 +143,7 @@ namespace Shadowsocks.NewView
 
         private void onCloseButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Close();
         }
     }
 }

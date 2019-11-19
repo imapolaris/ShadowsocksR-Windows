@@ -135,5 +135,15 @@ namespace Shadowsocks.NewView
                 this.MeTabIcon = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/Resources/me.png", UriKind.Absolute)));
             }
         }
+
+        private void onMiniButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void onCloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
