@@ -9,6 +9,7 @@
         WindowStyle="None"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
         Title="LoginScreen" Height="476" Width="739">
     <Window.Background>
         <ImageBrush ImageSource="/Resources/login_bg.png" Stretch="Fill"/>

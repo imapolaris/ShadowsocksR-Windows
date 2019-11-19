@@ -225,5 +225,16 @@ namespace Shadowsocks.NewView
         {
             Close();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.MouseDown += (x, y) =>
+            {
+                if (y.LeftButton == MouseButtonState.Pressed)
+                {
+                    this.DragMove();
+                }
+            };
+        }
     }
 }

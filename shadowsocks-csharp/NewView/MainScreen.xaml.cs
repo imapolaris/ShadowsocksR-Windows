@@ -99,6 +99,14 @@ namespace Shadowsocks.NewView
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            this.MouseDown += (x, y) =>
+            {
+                if (y.LeftButton == MouseButtonState.Pressed)
+                {
+                    this.DragMove();
+                }
+            };
+
             this.TabIndex = 0;
             this.onTabChanged(this.TabIndex);
             mainFrame.Navigate(allViews["page1"], this._controller);
