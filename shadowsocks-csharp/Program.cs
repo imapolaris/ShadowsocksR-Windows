@@ -72,6 +72,7 @@ namespace Shadowsocks
             _controller.Reload();
             if (_controller.IsDefaultConfig())
             {
+                /*
                 var res = MessageBox.Show(
                 $@"{I18NUtil.GetAppStringValue(@"DefaultConfigMessage")}{Environment.NewLine}{I18NUtil.GetAppStringValue(@"DefaultConfigQuestion")}",
                 UpdateChecker.Name, MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.OK);
@@ -93,6 +94,8 @@ namespace Shadowsocks
                         return;
                     }
                 }
+                */
+                _controller.ShowLoginScreen();
             }
 #if !DEBUG
             Reg.SetUrlProtocol(@"ssr");
