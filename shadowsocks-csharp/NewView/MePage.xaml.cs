@@ -20,6 +20,8 @@ namespace Shadowsocks.NewView
     /// </summary>
     public partial class MePage : Page
     {
+        public event EventHandler CloseMainScreenEvent;
+
         public MePage()
         {
             InitializeComponent();
@@ -27,7 +29,7 @@ namespace Shadowsocks.NewView
 
         private void onLogoutButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            CloseMainScreenEvent?.Invoke(default, default);
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

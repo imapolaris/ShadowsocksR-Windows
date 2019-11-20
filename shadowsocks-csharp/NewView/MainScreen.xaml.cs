@@ -90,11 +90,12 @@ namespace Shadowsocks.NewView
             mainFrame.Navigate(allViews["page1"], this._controller);
         }
 
+        private MePage mePage = null;
         private void onMeButton_Click(object sender, RoutedEventArgs e)
         {
             this.TabIndex = 1;
             this.onTabChanged(this.TabIndex);
-            mainFrame.Navigate(allViews["page2"], this._controller);
+            mainFrame.Navigate(mePage);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -110,6 +111,15 @@ namespace Shadowsocks.NewView
             this.TabIndex = 0;
             this.onTabChanged(this.TabIndex);
             mainFrame.Navigate(allViews["page1"], this._controller);
+
+            mePage = new MePage();
+            mePage.CloseMainScreenEvent += MePage_CloseMainScreenEvent;
+        }
+
+        private void MePage_CloseMainScreenEvent(object sender, EventArgs e)
+        {
+            Close();
+            _controller.ShowLoginScreen();
         }
 
         private void onTabChanged(int tabIndex)
