@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using Shadowsocks.NewModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -18,9 +20,32 @@ namespace Shadowsocks.NewView
     /// </summary>
     public partial class TracePage : Page
     {
-        public TracePage()
+        private readonly List<NodeModel> _nodes;
+
+        public TracePage(List<NodeModel> nodes)
         {
             InitializeComponent();
+
+            _nodes = nodes;
+        }
+
+        private void onBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService != null && NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.nodeList.ItemsSource = _nodes;
+        }
+        
+
+        private void onNodeButton_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

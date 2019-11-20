@@ -39,5 +39,35 @@ namespace Shadowsocks.NewModel
                 return null;
             }
         }
+
+        public static string Get(string url, string[] paramList)
+        {
+            try
+            {
+                if (url.StartsWith("https"))
+                    System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
+                var httpClient = new HttpClient();
+                httpClient.DefaultRequestHeaders.Accept.Add(
+                  new MediaTypeWithQualityHeaderValue("application/json"));
+                httpClient.Timeout = TimeSpan.FromSeconds(5);
+                string requestUrl = url;
+                if (paramList != null && paramList.Length > 0)
+                {
+                    requestUrl += "?" + string.Join("&", paramList);
+                }
+                HttpResponseMessage response = httpClient.GetAsync(requestUrl).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string result = response.Content.ReadAsStringAsync().Result;
+                    Console.WriteLine(result);
+                    return result;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }
