@@ -379,7 +379,7 @@ namespace Shadowsocks.Controller
         private void controller_ToggleRuleModeChanged(object sender, EventArgs e)
         {
             var config = controller.GetCurrentConfiguration();
-            UpdateProxyRule(config);
+            // UpdateProxyRule(config);
         }
 
         private void controller_FileReadyToOpen(object sender, ShadowsocksController.PathEventArgs e)
@@ -584,18 +584,18 @@ namespace Shadowsocks.Controller
             {
                 if (updateChecker.Found)
                 {
-                    if (UpdateItem.Visibility != Visibility.Visible)
-                    {
-                        _notifyIcon.ShowBalloonTip(
-                                string.Format(I18NUtil.GetAppStringValue(@"NewVersionFound"),
-                                UpdateChecker.Name, updateChecker.LatestVersionNumber),
-                                I18NUtil.GetAppStringValue(@"ClickMenuToDownload"), BalloonIcon.Info);
-                    }
-                    _moreMenu.Icon = CreateSelectedIcon();
-                    _updateMenu.Icon = CreateSelectedIcon();
-                    UpdateItem.Visibility = Visibility.Visible;
-                    UpdateItem.Header = string.Format(I18NUtil.GetAppStringValue(@"NewVersionAvailable"),
-                            UpdateChecker.Name, updateChecker.LatestVersionNumber);
+                    //if (UpdateItem.Visibility != Visibility.Visible)
+                    //{
+                    //    _notifyIcon.ShowBalloonTip(
+                    //            string.Format(I18NUtil.GetAppStringValue(@"NewVersionFound"),
+                    //            UpdateChecker.Name, updateChecker.LatestVersionNumber),
+                    //            I18NUtil.GetAppStringValue(@"ClickMenuToDownload"), BalloonIcon.Info);
+                    //}
+                    //_moreMenu.Icon = CreateSelectedIcon();
+                    //_updateMenu.Icon = CreateSelectedIcon();
+                    //UpdateItem.Visibility = Visibility.Visible;
+                    //UpdateItem.Header = string.Format(I18NUtil.GetAppStringValue(@"NewVersionAvailable"),
+                    //        UpdateChecker.Name, updateChecker.LatestVersionNumber);
                 }
             });
         }
@@ -648,15 +648,15 @@ namespace Shadowsocks.Controller
         private void LoadCurrentConfiguration()
         {
             var config = controller.GetCurrentConfiguration();
-            UpdateServersMenu();
-            UpdateSysProxyMode(config);
+            // UpdateServersMenu();
+            // UpdateSysProxyMode(config);
 
-            UpdateProxyRule(config);
+            // UpdateProxyRule(config);
 
-            SelectRandomItem.IsChecked = config.random;
-            sameHostForSameTargetItem.IsChecked = config.sameHostForSameTarget;
-            AutoCheckUpdateItem.IsChecked = config.AutoCheckUpdate;
-            AllowPreReleaseItem.IsChecked = config.isPreRelease;
+            // SelectRandomItem.IsChecked = config.random;
+            // sameHostForSameTargetItem.IsChecked = config.sameHostForSameTarget;
+            // AutoCheckUpdateItem.IsChecked = config.AutoCheckUpdate;
+            // AllowPreReleaseItem.IsChecked = config.isPreRelease;
         }
 
         private static Grid CreateSelectedIcon()
