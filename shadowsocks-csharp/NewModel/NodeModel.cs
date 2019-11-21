@@ -8,7 +8,7 @@ namespace Shadowsocks.NewModel
     {
         public string Remarks { get; set; }
         public string Server { get; set; }
-        public int Server_Port { get; set; }
+        public ushort Server_Port { get; set; }
         public string Method { get; set; }
         public string Group { get; set; }
         public string Obfs { get; set; }
@@ -23,5 +23,23 @@ namespace Shadowsocks.NewModel
         public string Sublink { get; set; }
 
         public bool Used { get; set; } = false;
+
+        public Model.Server GetServer()
+        {
+            Model.Server server = new Model.Server();
+            server.Enable = Enable;
+            server.Group = Group;
+            server.Method = Method;
+            server.obfs = Obfs;
+            server.ObfsParam = Obfsparam;
+            server.Password = Password;
+            server.Protocol = Protocol;
+            server.Remarks = Remarks;
+            server.Remarks_Base64 = Remarks_Base64;
+            server.server = Server;
+            server.Server_Port = Server_Port;
+
+            return server;
+        }
     }
 }

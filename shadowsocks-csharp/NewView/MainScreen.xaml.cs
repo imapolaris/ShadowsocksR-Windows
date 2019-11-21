@@ -18,8 +18,6 @@ namespace Shadowsocks.NewView
     /// </summary>
     public partial class MainScreen : Window
     {
-        private Dictionary<string, Uri> allViews = new Dictionary<string, Uri>(); //包含所有页面
-
         public new int TabIndex
         {
             get => (int)GetValue(TabIndexProperty);
@@ -76,9 +74,6 @@ namespace Shadowsocks.NewView
             this.DataContext = this;
 
             this._controller = controller;
-
-            allViews.Add("page1", new Uri("/NewView/SpeedPage.xaml", UriKind.Relative));
-            allViews.Add("page2", new Uri("/NewView/MePage.xaml", UriKind.Relative));
         }
 
         private readonly ShadowsocksController _controller;
@@ -87,10 +82,11 @@ namespace Shadowsocks.NewView
         {
             this.TabIndex = 0;
             this.onTabChanged(this.TabIndex);
-            mainFrame.Navigate(allViews["page1"], this._controller);
+            mainFrame.Navigate(speedPage);
         }
 
         private MePage mePage = null;
+        private SpeedPage speedPage = null;
         private void onMeButton_Click(object sender, RoutedEventArgs e)
         {
             this.TabIndex = 1;
@@ -110,14 +106,17 @@ namespace Shadowsocks.NewView
 
             this.TabIndex = 0;
             this.onTabChanged(this.TabIndex);
-            mainFrame.Navigate(allViews["page1"], this._controller);
 
             mePage = new MePage();
             mePage.CloseMainScreenEvent += MePage_CloseMainScreenEvent;
+
+            speedPage = new SpeedPage(_controller);
+            mainFrame.Navigate(speedPage);
         }
 
         private void MePage_CloseMainScreenEvent(object sender, EventArgs e)
         {
+            _controller.Stop();
             NewModel.CurrentUser.Reset();
             Close();
             _controller.ShowLoginScreen();

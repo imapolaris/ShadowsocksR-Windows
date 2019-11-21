@@ -33,10 +33,7 @@ namespace Shadowsocks.NewView
 
         private void onBackButton_Click(object sender, RoutedEventArgs e)
         {
-            if (NavigationService != null && NavigationService.CanGoBack)
-            {
-                NavigationService.GoBack();
-            }
+            goBack();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -52,6 +49,16 @@ namespace Shadowsocks.NewView
                 return;
 
             ChooseNodeEvent?.Invoke(node, default);
+
+            goBack();
+        }
+
+        private void goBack()
+        {
+            if (NavigationService != null && NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
         }
     }
 }

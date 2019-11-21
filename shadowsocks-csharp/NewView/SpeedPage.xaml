@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:Shadowsocks.NewView"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="620"
+      Loaded="Page_Loaded"
       Title="SpeedPage">
 
     <StackPanel>
@@ -79,9 +80,7 @@
                     </TextBlock>
                 </StackPanel>
 
-                <TextBlock Grid.Column="1" FontSize="14" Foreground="#333" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    单端口
-                </TextBlock>
+                <TextBlock x:Name="traceName" Grid.Column="1" FontSize="14" Foreground="#333" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                 <DockPanel Grid.Column="2" Width="100" HorizontalAlignment="Right">
                     <Button Click="onChooseTraceButton_Click">

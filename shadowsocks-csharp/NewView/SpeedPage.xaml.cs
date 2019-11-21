@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
+using Shadowsocks.Controller;
+using Shadowsocks.Model;
 using Shadowsocks.NewModel;
 using System;
 using System.Collections.Generic;
@@ -20,7 +22,7 @@ namespace Shadowsocks.NewView
     /// </summary>
     public partial class SpeedPage : Page
     {
-        public static NodeModel CurrentNode { get; set; }
+        public NodeModel CurrentNode { get; set; }
 
         // 延迟
         public string Delay
@@ -49,7 +51,9 @@ namespace Shadowsocks.NewView
 
         public static readonly DependencyProperty PromoteProperty = DependencyProperty.Register(@"Promote", typeof(string), typeof(SpeedPage));
 
-        public SpeedPage()
+
+        private readonly ShadowsocksController _controller;
+        public SpeedPage(ShadowsocksController controller)
         {
             InitializeComponent();
 
@@ -58,12 +62,58 @@ namespace Shadowsocks.NewView
             this.Delay = "--";
             this.Loss = "--";
             this.Promote = "--";
+
+            _controller = controller;
+            _controller.ConfigChanged += _controller_ConfigChanged; ;
         }
 
-        // 开始加速
+        private void _controller_ConfigChanged(object sender, EventArgs e)
+        {
+            LoadCurrentConfiguration();
+        }
+
+        private Configuration _modifiedConfiguration;
+        private void LoadCurrentConfiguration()
+        {
+            _modifiedConfiguration = _controller.GetConfiguration();
+        }
+
+            // 开始加速
         private void onSpeedButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (CurrentNode == null)
+                return;
+
+            SaveConfig();
+        }
+
+        private bool SaveConfig()
+        {
+            string oldServerId = null;
+            if (_modifiedConfiguration.index >= 0 && _modifiedConfiguration.index < _modifiedConfiguration.configs.Count)
+            {
+                oldServerId = _modifiedConfiguration.configs[_modifiedConfiguration.index].Id;
+            }
+            _modifiedConfiguration.configs.Clear();
+            Server[] servers = new Server[] { CurrentNode.GetServer() };
+            _modifiedConfiguration.configs.AddRange(servers);
+            if (oldServerId != null)
+            {
+                var currentIndex = _modifiedConfiguration.configs.FindIndex(server => server.Id == oldServerId);
+                if (currentIndex != -1)
+                {
+                    _modifiedConfiguration.index = currentIndex;
+                }
+            }
+
+            if (_modifiedConfiguration.configs.Count == 0)
+            {
+                MessageBox.Show("请选择至少一条加速路线");
+                return false;
+            }
+
+            _controller.SaveServersConfig(_modifiedConfiguration);
+            return true;
         }
 
         // 选择线路
@@ -81,6 +131,12 @@ namespace Shadowsocks.NewView
         private void Page_ChooseNodeEvent(object sender, EventArgs e)
         {
             NodeModel node = sender as NodeModel;
+            CurrentNode = node;
+
+            if (CurrentNode != null)
+            {
+                traceName.Text = CurrentNode.Remarks;
+            }
         }
 
         private List<NodeModel> fetchData()
@@ -118,7 +174,7 @@ namespace Shadowsocks.NewView
                             NodeModel nodeModel = new NodeModel();
                             nodeModel.Remarks = (string)node["remarks"];
                             nodeModel.Server = (string)node["server"];
-                            nodeModel.Server_Port = (int)node["server_port"];
+                            nodeModel.Server_Port = (ushort)node["server_port"];
                             nodeModel.Method = (string)node["method"];
                             nodeModel.Group = (string)node["group"];
                             nodeModel.Obfs = (string)node["obfs"];
@@ -150,6 +206,11 @@ namespace Shadowsocks.NewView
                 Console.WriteLine(ex.Message);
                 return null;
             }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadCurrentConfiguration();
         }
     }
 }
