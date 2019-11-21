@@ -101,8 +101,8 @@ namespace Shadowsocks.NewView
             this.IsRegister = false;
             this.ScreenTitle = "邮箱登录";
             this.LoginButtonTitle = "登录";
-            this.Email = "请输入您的邮箱";
-            this.Password = "请输入正确密码";
+            this.Email = "";
+            this.Password = "";
         }
 
         private readonly ShadowsocksController _controller;
