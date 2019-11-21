@@ -230,7 +230,7 @@ namespace Shadowsocks.Model.Transfer
                 var m = errorLogTimes + Connecting;
                 if (m > 0)
                 {
-                    return (ConnectError + ErrorTimeoutTimes) * 100.0 / m;
+                    return Math.Round((ConnectError + ErrorTimeoutTimes) * 100.0 / m, 2);
                 }
 
                 return null;

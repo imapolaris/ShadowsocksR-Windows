@@ -4,6 +4,7 @@ using Shadowsocks.Model;
 using Shadowsocks.NewModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,8 +21,16 @@ namespace Shadowsocks.NewView
     /// <summary>
     /// SpeedPage.xaml 的交互逻辑
     /// </summary>
-    public partial class SpeedPage : Page
+    public partial class SpeedPage : Page, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged( string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public NodeModel CurrentNode { get; set; }
 
         // 延迟
@@ -70,6 +79,8 @@ namespace Shadowsocks.NewView
         private void _controller_ConfigChanged(object sender, EventArgs e)
         {
             LoadCurrentConfiguration();
+
+            ReadConfig();
         }
 
         private Configuration _modifiedConfiguration;
@@ -85,6 +96,7 @@ namespace Shadowsocks.NewView
                 return;
 
             SaveConfig();
+            ReadConfig();
         }
 
         private bool SaveConfig()
@@ -114,6 +126,30 @@ namespace Shadowsocks.NewView
 
             _controller.SaveServersConfig(_modifiedConfiguration);
             return true;
+        }
+
+        private Server _currentServer;
+
+        public Server CurrentServer
+        {
+            get => _currentServer;
+            private set
+            {
+                if (_currentServer != value)
+                {
+                    _currentServer = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public void ReadConfig()
+        {
+            var config = _controller.GetCurrentConfiguration();
+            if (config != null && config.configs != null && config.configs.Count > 0)
+            {
+                CurrentServer = config.configs[0];
+            }
         }
 
         // 选择线路

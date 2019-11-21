@@ -29,7 +29,7 @@
                 </StackPanel>
 
                 <TextBlock FontSize="14" Foreground="#658FF1" HorizontalAlignment="Center" Margin="0 12 0 0"
-                           Text="{Binding Delay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                           Text="{Binding CurrentServer.SpeedLog.AvgConnectTimeText}"/>
 
                 <TextBlock FontSize="14" Foreground="#fff" HorizontalAlignment="Center" Margin="0 12 0 0">
                     %
@@ -44,7 +44,7 @@
                     </TextBlock>
                 </StackPanel>
 
-                <TextBlock FontSize="14" Foreground="#658FF1" HorizontalAlignment="Center" Margin="0 12 0 0" Text="{Binding Loss, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock FontSize="14" Foreground="#658FF1" HorizontalAlignment="Center" Margin="0 12 0 0" Text="{Binding CurrentServer.SpeedLog.ErrorPercent}" />
 
                 <TextBlock FontSize="14" Foreground="#fff" HorizontalAlignment="Center" Margin="0 12 0 0">
                     %
@@ -59,7 +59,7 @@
                     </TextBlock>
                 </StackPanel>
 
-                <TextBlock FontSize="14" Foreground="#658FF1" HorizontalAlignment="Center" Margin="0 12 0 0" Text="{Binding Promote, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock FontSize="14" Foreground="#658FF1" HorizontalAlignment="Center" Margin="0 12 0 0" Text="{Binding CurrentServer.SpeedLog.ErrorPercent}" />
 
                 <TextBlock FontSize="14" Foreground="#fff" HorizontalAlignment="Center" Margin="0 12 0 0">
                     %
