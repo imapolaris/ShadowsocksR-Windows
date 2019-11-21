@@ -70,10 +70,17 @@ namespace Shadowsocks.NewView
         private void onChooseTraceButton_Click(object sender, RoutedEventArgs e)
         {
             List<NodeModel> nodes = fetchData();
+            TracePage page = new TracePage(nodes);
+            page.ChooseNodeEvent += Page_ChooseNodeEvent;
             if (nodes != null && nodes.Count > 0)
             {
-                NavigationService.Navigate(new TracePage(nodes));
+                NavigationService.Navigate(page);
             }
+        }
+
+        private void Page_ChooseNodeEvent(object sender, EventArgs e)
+        {
+            NodeModel node = sender as NodeModel;
         }
 
         private List<NodeModel> fetchData()

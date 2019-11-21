@@ -22,6 +22,8 @@ namespace Shadowsocks.NewView
     {
         private readonly List<NodeModel> _nodes;
 
+        public event EventHandler ChooseNodeEvent;
+
         public TracePage(List<NodeModel> nodes)
         {
             InitializeComponent();
@@ -45,7 +47,11 @@ namespace Shadowsocks.NewView
 
         private void onNodeButton_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            NodeModel node = (sender as Button).DataContext as NodeModel;
+            if (node == null)
+                return;
 
+            ChooseNodeEvent?.Invoke(node, default);
         }
     }
 }
