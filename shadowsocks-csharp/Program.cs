@@ -69,8 +69,8 @@ namespace Shadowsocks
             _viewController = new MenuViewController(_controller);
             SystemEvents.SessionEnding += _viewController.Quit_Click;
 
-            _controller.Reload();
-            if (_controller.IsDefaultConfig())
+            // _controller.Reload();
+            // if (_controller.IsDefaultConfig())
             {
                 /*
                 var res = MessageBox.Show(

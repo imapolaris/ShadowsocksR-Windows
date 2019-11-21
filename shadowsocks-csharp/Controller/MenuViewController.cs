@@ -119,8 +119,8 @@ namespace Shadowsocks.Controller
             _notifyIcon.ContextMenu = _contextMenu;
 
             _notifyIcon.TrayLeftMouseUp += notifyIcon_TrayLeftMouseUp;
-            _notifyIcon.TrayMiddleMouseUp += notifyIcon_TrayMiddleMouseUp;
-            _notifyIcon.TrayBalloonTipClicked += notifyIcon_TrayBalloonTipClicked;
+            // _notifyIcon.TrayMiddleMouseUp += notifyIcon_TrayMiddleMouseUp;
+            // _notifyIcon.TrayBalloonTipClicked += notifyIcon_TrayBalloonTipClicked;
 
             updateChecker = new UpdateChecker();
             updateChecker.NewVersionFound += updateChecker_NewVersionFound;
@@ -1101,6 +1101,19 @@ namespace Shadowsocks.Controller
                 timerDelayCheckUpdate.Stop();
                 timerDelayCheckUpdate = null;
             }
+
+            if (_loginScreen != null)
+            {
+                _loginScreen.Close();
+                _loginScreen = null;
+            }
+
+            if (_mainScreen != null)
+            {
+                _mainScreen.Close();
+                _mainScreen = null;
+            }
+
             if (_notifyIcon.Icon != null)
             {
                 ViewUtils.DestroyIcon(_notifyIcon.Icon.Handle);
@@ -1126,6 +1139,7 @@ namespace Shadowsocks.Controller
 
         private void notifyIcon_TrayLeftMouseUp(object sender, RoutedEventArgs e)
         {
+            /*
             var key = Keyboard.IsKeyDown(Key.LeftShift) ? 1 : 0;
             key |= Keyboard.IsKeyDown(Key.RightShift) ? 1 : 0;
             key |= Keyboard.IsKeyDown(Key.LeftCtrl) ? 2 : 0;
@@ -1148,6 +1162,15 @@ namespace Shadowsocks.Controller
                 default:
                     ShowConfigForm(false);
                     break;
+            }
+            */
+            if (NewModel.CurrentUser.IsLogined)
+            {
+                ShowMainScreen();
+            }
+            else
+            {
+                ShowLoginScreen();
             }
         }
 

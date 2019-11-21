@@ -118,6 +118,7 @@ namespace Shadowsocks.NewView
 
         private void MePage_CloseMainScreenEvent(object sender, EventArgs e)
         {
+            NewModel.CurrentUser.Reset();
             Close();
             _controller.ShowLoginScreen();
         }

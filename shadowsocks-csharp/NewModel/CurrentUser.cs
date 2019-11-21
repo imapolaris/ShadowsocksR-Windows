@@ -26,5 +26,13 @@ namespace Shadowsocks.NewModel
                 return LoginDate.ToString("yyyy-MM-dd HH:mm:ss");
             }
         }
+
+        public static void Reset()
+        {
+            IsLogined = false;
+            Email = "";
+            User_Id = "";
+            Token = "";
+        }
     }
 }
