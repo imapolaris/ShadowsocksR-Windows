@@ -4,11 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Shadowsocks.NewView"
+        xmlns:converter="clr-namespace:Shadowsocks.NewModel"
         mc:Ignorable="d"
         AllowsTransparency="True"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Title="MainScreen" Height="476" Width="739" Loaded="Window_Loaded">
+    <Window.Resources>
+        <converter:SpeedTabIconConverter x:Key="speedTabIconConverter" />
+        <converter:MeTabIconConverter x:Key="meTabIconConverter" />
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="120" />
@@ -33,7 +38,7 @@
                                 <Setter.Value>
                                     <ControlTemplate TargetType="Button">
                                         <StackPanel Orientation="Horizontal" Width="120" Height="65" Background="{TemplateBinding Background}">
-                                            <Image Source="/Resources/speed.png" Width="25" Height="30" Margin="25 0 0 0"  />
+                                            <Image Source="{Binding TabIndex, Converter={StaticResource speedTabIconConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="25" Height="30" Margin="25 0 0 0"  />
                                             <TextBlock Foreground="{TemplateBinding Button.Foreground}" FontSize="14" VerticalAlignment="Center" Margin="18 0 0 0">
                                                 加速
                                             </TextBlock>
@@ -60,7 +65,7 @@
                                 <Setter.Value>
                                     <ControlTemplate TargetType="Button">
                                         <StackPanel Orientation="Horizontal" Width="120" Height="65" Background="{TemplateBinding Background}">
-                                            <Image Source="/Resources/me.png" Width="25" Height="30" Margin="25 0 0 0"  />
+                                            <Image Source="{Binding TabIndex, Converter={StaticResource meTabIconConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="25" Height="30" Margin="25 0 0 0"  />
                                             <TextBlock Foreground="{TemplateBinding Foreground}" FontSize="14" VerticalAlignment="Center" Margin="18 0 0 0">
                                                 我的
                                             </TextBlock>
