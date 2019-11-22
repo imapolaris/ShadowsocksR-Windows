@@ -31,7 +31,20 @@ namespace Shadowsocks.NewView
             handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public NodeModel CurrentNode { get; set; }
+
+        private NodeModel _currentNode;
+        public NodeModel CurrentNode
+        {
+            get => _currentNode;
+            private set
+            {
+                if (_currentNode != value)
+                {
+                    _currentNode = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         // 延迟
         public string Delay
@@ -150,6 +163,10 @@ namespace Shadowsocks.NewView
             if (config != null && config.configs != null && config.configs.Count > 0)
             {
                 CurrentServer = config.configs[0];
+                if (CurrentNode == null)
+                    CurrentNode = new NodeModel();
+                CurrentNode.GetNode(CurrentServer);
+                traceName.Text = CurrentNode.Remarks;
             }
         }
 
@@ -248,6 +265,8 @@ namespace Shadowsocks.NewView
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             LoadCurrentConfiguration();
+
+            ReadConfig();
         }
     }
 }

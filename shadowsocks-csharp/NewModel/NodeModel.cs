@@ -42,5 +42,22 @@ namespace Shadowsocks.NewModel
 
             return server;
         }
+
+        public NodeModel GetNode(Model.Server server)
+        {
+            Enable = server.Enable;
+            Group = server.Group;
+            Method = server.Method;
+            Obfs = server.obfs;
+            Obfsparam = server.ObfsParam;
+            Password = server.Password;
+            Protocol = server.Protocol;
+            Remarks = server.Remarks;
+            Remarks_Base64 = server.Remarks_Base64;
+            Server = server.server;
+            Server_Port = server.Server_Port;
+
+            return this;
+        }
     }
 }
