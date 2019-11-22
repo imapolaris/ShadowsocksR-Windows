@@ -87,6 +87,7 @@ namespace Shadowsocks.NewView
         private void LoadCurrentConfiguration()
         {
             _modifiedConfiguration = _controller.GetConfiguration();
+            _modifiedConfiguration.sysProxyMode = ProxyMode.Global;
         }
 
             // 开始加速
