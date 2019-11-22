@@ -104,7 +104,7 @@
                 <StackPanel Orientation="Horizontal" Height="42" VerticalAlignment="Center">
                     <Image Source="/Resources/suo.png" Width="12" Height="16" Margin="9 0 0 0" />
                     <TextBox Width="380" Margin="14 0 0 0" AutoWordSelection="True" BorderThickness="0,0,0,0" Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             TextAlignment="Left" VerticalAlignment="Center" Foreground="#fff" FontSize="14" FontFamily="PingFangSC-Regular" InputScope="Password">
+                             TextAlignment="Left" VerticalAlignment="Center" Foreground="Transparent" FontSize="14" FontFamily="PingFangSC-Regular" InputScope="Password">
                         <TextBox.Resources>
                             <VisualBrush x:Key="HelpBrush" TileMode="None" Stretch="None" AlignmentX="Left">
                                 <VisualBrush.Visual>
@@ -112,9 +112,28 @@
                                 </VisualBrush.Visual>
                             </VisualBrush>
                         </TextBox.Resources>
+                        
                         <TextBox.Style>
                             <Style TargetType="TextBox">
                                 <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="TextDecorations">
+                                    <Setter.Value>
+                                        <TextDecorationCollection>
+                                            <TextDecoration>
+                                                <TextDecoration.Pen>
+                                                    <Pen Thickness="9" Brush="#fff" EndLineCap="Round" StartLineCap="Round" DashCap="Round" >
+                                                        <Pen.DashStyle>
+                                                            <DashStyle Dashes="0.0,1.2" Offset="0.4"/>
+                                                        </Pen.DashStyle>
+                                                    </Pen>
+                                                </TextDecoration.Pen>
+                                                <TextDecoration.Location>
+                                                    <TextDecorationLocation>Strikethrough</TextDecorationLocation>
+                                                </TextDecoration.Location>
+                                            </TextDecoration>
+                                        </TextDecorationCollection>
+                                    </Setter.Value>
+                                </Setter>
                                 <Style.Triggers>
                                     <Trigger Property="Text" Value="{x:Null}">
                                         <Setter Property="Background" Value="{StaticResource HelpBrush}"/>
