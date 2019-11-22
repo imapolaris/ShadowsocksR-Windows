@@ -38,6 +38,7 @@ namespace Shadowsocks.NewModel
             server.Remarks_Base64 = Remarks_Base64;
             server.server = Server;
             server.Server_Port = Server_Port;
+            server.ProtocolParam = "18:PEUvBV"; // TODO:让后台添加此参数
 
             return server;
         }
