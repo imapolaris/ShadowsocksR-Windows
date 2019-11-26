@@ -74,6 +74,15 @@ namespace Shadowsocks.NewView
         public static readonly DependencyProperty PromoteProperty = DependencyProperty.Register(@"Promote", typeof(string), typeof(SpeedPage));
 
 
+        public string Remarks
+        {
+            get => GetValue(RemarksProperty) as string;
+            set => SetValue(RemarksProperty, value);
+        }
+
+        public static readonly DependencyProperty RemarksProperty = DependencyProperty.Register(@"Remarks", typeof(string), typeof(SpeedPage));
+
+
         private readonly ShadowsocksController _controller;
         public SpeedPage(ShadowsocksController controller)
         {
@@ -166,7 +175,8 @@ namespace Shadowsocks.NewView
                 {
                     CurrentNode = new NodeModel();
                     CurrentNode.GetNode(CurrentServer);
-                    traceName.Text = CurrentNode.Remarks;
+                    // traceName.Text = CurrentNode.Remarks;
+                    this.Remarks = CurrentNode.Remarks;
                 }
             }
         }
@@ -190,7 +200,8 @@ namespace Shadowsocks.NewView
 
             if (CurrentNode != null)
             {
-                traceName.Text = CurrentNode.Remarks;
+                // traceName.Text = CurrentNode.Remarks;
+                this.Remarks = CurrentNode.Remarks;
             }
         }
 
