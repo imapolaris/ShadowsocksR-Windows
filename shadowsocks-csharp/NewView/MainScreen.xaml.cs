@@ -26,12 +26,12 @@ namespace Shadowsocks.NewView
 
         public new static readonly DependencyProperty TabIndexProperty = DependencyProperty.Register(@"TabIndex", typeof(int), typeof(MainScreen));
 
-        public ImageBrush SpeedTabBackground
+        public Brush SpeedTabBackground
         {
-            get => GetValue(SpeedTabBackgroundProperty) as ImageBrush;
+            get => GetValue(SpeedTabBackgroundProperty) as Brush;
             set => SetValue(SpeedTabBackgroundProperty, value);
         }
-        public static readonly DependencyProperty SpeedTabBackgroundProperty = DependencyProperty.Register(@"SpeedTabBackground", typeof(ImageBrush), typeof(MainScreen));
+        public static readonly DependencyProperty SpeedTabBackgroundProperty = DependencyProperty.Register(@"SpeedTabBackground", typeof(Brush), typeof(MainScreen));
         public Brush SpeedTabForeground
         {
             get => GetValue(SpeedTabForegroundProperty) as Brush;
@@ -40,12 +40,12 @@ namespace Shadowsocks.NewView
         public static readonly DependencyProperty SpeedTabForegroundProperty = DependencyProperty.Register(@"SpeedTabForeground", typeof(Brush), typeof(MainScreen));
 
 
-        public ImageBrush MeTabBackground
+        public Brush MeTabBackground
         {
-            get => GetValue(MeTabBackgroundProperty) as ImageBrush;
+            get => GetValue(MeTabBackgroundProperty) as Brush;
             set => SetValue(MeTabBackgroundProperty, value);
         }
-        public static readonly DependencyProperty MeTabBackgroundProperty = DependencyProperty.Register(@"MeTabBackground", typeof(ImageBrush), typeof(MainScreen));
+        public static readonly DependencyProperty MeTabBackgroundProperty = DependencyProperty.Register(@"MeTabBackground", typeof(Brush), typeof(MainScreen));
         public Brush MeTabForeground
         {
             get => GetValue(MeTabForegroundProperty) as Brush;
@@ -136,12 +136,12 @@ namespace Shadowsocks.NewView
                 this.MeTabIcon = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/Resources/me_disable.png", UriKind.Absolute)));
 
                 this.MeTabForeground = new SolidColorBrush(Color.FromRgb((byte)138, (byte)137, (byte)154)); // #8A899A
-                this.MeTabBackground = null;
+                this.MeTabBackground = new SolidColorBrush(Color.FromRgb((byte)29, (byte)30, (byte)47)); // #1D1E2F
             } 
             else if (tabIndex == 1)
             {
                 this.SpeedTabForeground = new SolidColorBrush(Color.FromRgb((byte)138, (byte)137, (byte)154)); // #8A899A
-                this.SpeedTabBackground = null;
+                this.SpeedTabBackground = new SolidColorBrush(Color.FromRgb((byte)29, (byte)30, (byte)47)); // #1D1E2F;
 
                 this.MeTabForeground = new SolidColorBrush(Color.FromRgb((byte)255, (byte)255, (byte)255));
                 ImageBrush imageBrush = new ImageBrush();

@@ -110,7 +110,6 @@ namespace Shadowsocks.NewView
                 return;
 
             SaveConfig();
-            ReadConfig();
         }
 
         private bool SaveConfig()
@@ -164,9 +163,11 @@ namespace Shadowsocks.NewView
             {
                 CurrentServer = config.configs[0];
                 if (CurrentNode == null)
+                {
                     CurrentNode = new NodeModel();
-                CurrentNode.GetNode(CurrentServer);
-                traceName.Text = CurrentNode.Remarks;
+                    CurrentNode.GetNode(CurrentServer);
+                    traceName.Text = CurrentNode.Remarks;
+                }
             }
         }
 

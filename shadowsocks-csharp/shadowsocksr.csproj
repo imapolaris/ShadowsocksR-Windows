@@ -6,7 +6,7 @@
     <UseWPF>true</UseWPF>
 	
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <AssemblyName>ShadowsocksR</AssemblyName>
+    <AssemblyName>Golink</AssemblyName>
     <RootNamespace>Shadowsocks</RootNamespace>
     <ApplicationIcon>shadowsocks.ico</ApplicationIcon>
     <StartupObject>Shadowsocks.Program</StartupObject>
