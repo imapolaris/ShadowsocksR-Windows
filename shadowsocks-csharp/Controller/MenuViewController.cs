@@ -165,7 +165,7 @@ namespace Shadowsocks.Controller
             var random = config.random;
 
             var colorMask = ViewUtils.SelectColorMask(enabled, global);
-            var icon = ViewUtils.ChangeBitmapColor(Resources.ss128, colorMask, random);
+            var icon = new Bitmap(Resources.ss128); // ViewUtils.ChangeBitmapColor(Resources.ss128, colorMask, random);
             var size = ViewUtils.GetIconSize();
             var newIcon = Icon.FromHandle(ViewUtils.ResizeBitmap(icon, size.Width, size.Height).GetHicon());
 
