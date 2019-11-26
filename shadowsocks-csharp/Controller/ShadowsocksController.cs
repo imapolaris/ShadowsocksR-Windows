@@ -313,11 +313,11 @@ namespace Shadowsocks.Controller
 
         public void Stop()
         {
-            if (stopped)
-            {
-                return;
-            }
-            stopped = true;
+            //if (stopped)
+            //{
+            //    return;
+            //}
+            //stopped = true;
 
             if (_port_map_listener != null)
             {

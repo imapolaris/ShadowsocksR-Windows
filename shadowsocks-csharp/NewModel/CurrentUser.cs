@@ -33,6 +33,9 @@ namespace Shadowsocks.NewModel
             Email = "";
             User_Id = "";
             Token = "";
+            IsSpeeding = false;
         }
+
+        public static bool IsSpeeding { get; set; } = false;
     }
 }

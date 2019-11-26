@@ -120,9 +120,7 @@
                                         <ImageBrush ImageSource="/Resources/btn_bg.png" />
                                     </StackPanel.Background>
 
-                                    <TextBlock Foreground="#fff" FontSize="20" FontFamily="PingFangSC-Regular" HorizontalAlignment="Center" Margin="0 24 0 0">
-                                        开始加速
-                                    </TextBlock>
+                                    <TextBlock Foreground="#fff" FontSize="20" FontFamily="PingFangSC-Regular" HorizontalAlignment="Center" Margin="0 24 0 0" Text="{Binding ButtonTitle}" />
                                 </StackPanel>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">

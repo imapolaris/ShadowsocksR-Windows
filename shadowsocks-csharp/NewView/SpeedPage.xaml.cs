@@ -82,6 +82,14 @@ namespace Shadowsocks.NewView
 
         public static readonly DependencyProperty RemarksProperty = DependencyProperty.Register(@"Remarks", typeof(string), typeof(SpeedPage));
 
+        public string ButtonTitle
+        {
+            get => GetValue(ButtonTitleProperty) as string;
+            set => SetValue(ButtonTitleProperty, value);
+        }
+
+        public static readonly DependencyProperty ButtonTitleProperty = DependencyProperty.Register(@"ButtonTitle", typeof(string), typeof(SpeedPage));
+
 
         private readonly ShadowsocksController _controller;
         public SpeedPage(ShadowsocksController controller)
@@ -93,6 +101,8 @@ namespace Shadowsocks.NewView
             this.Delay = "--";
             this.Loss = "--";
             this.Promote = "--";
+
+            this.ButtonTitle = "开始加速";
 
             _controller = controller;
             _controller.ConfigChanged += _controller_ConfigChanged; ;
@@ -115,10 +125,29 @@ namespace Shadowsocks.NewView
             // 开始加速
         private void onSpeedButton_Click(object sender, RoutedEventArgs e)
         {
-            if (CurrentNode == null)
-                return;
+            if (this.ButtonTitle == "开始加速")
+            {
+                if (CurrentNode == null)
+                    return;
 
-            SaveConfig();
+                bool res = SaveConfig();
+                if (res)
+                {
+                    CurrentUser.IsSpeeding = true;
+                    this.ButtonTitle = "停止加速";
+                }
+                else
+                {
+                    MessageBox.Show("启动加速失败！");
+                }
+            }
+            else
+            {
+                this.Stop();
+                this.ButtonTitle = "开始加速";
+                CurrentUser.IsSpeeding = false;
+            }
+            
         }
 
         private bool SaveConfig()
@@ -150,6 +179,11 @@ namespace Shadowsocks.NewView
             return true;
         }
 
+        private void Stop()
+        {
+            _controller.Stop();
+        }
+
         private Server _currentServer;
 
         public Server CurrentServer
@@ -177,6 +211,11 @@ namespace Shadowsocks.NewView
                     CurrentNode.GetNode(CurrentServer);
                     // traceName.Text = CurrentNode.Remarks;
                     this.Remarks = CurrentNode.Remarks;
+
+                    if (CurrentUser.IsSpeeding)
+                    {
+                        this.ButtonTitle = "停止加速";
+                    }
                 }
             }
         }
