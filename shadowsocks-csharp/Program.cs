@@ -101,12 +101,6 @@ namespace Shadowsocks
             Reg.SetUrlProtocol(@"ssr");
             Reg.SetUrlProtocol(@"sub");
 #endif
-            DateTime now = DateTime.Now;
-            if (now.Month >= 12)
-            {
-                return;
-            }
-
             singleInstance.ListenForArgumentsFromSuccessiveInstances();
             app.Run();
         }
