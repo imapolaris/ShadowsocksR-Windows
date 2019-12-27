@@ -11,14 +11,30 @@
 
     <Grid>
         <StackPanel HorizontalAlignment="Center">
-            <Image Source="/Resources/me_logo.png" Height="65" Width="65" Margin="0 55 0 0" />
+            <DockPanel Margin="0 55 0 0" HorizontalAlignment="Center">
+                <Image Source="/Resources/me_logo.png" Height="75" Width="75" />
 
-            <TextBlock x:Name="loginUser" Margin="0 29 0 0" FontSize="16" FontFamily="PingFangSC-Regular" Foreground="#fff" HorizontalAlignment="Center">
-                alex@gmail.com
+                <StackPanel Margin="25 0 0 0" VerticalAlignment="Center">
+                    <TextBlock x:Name="loginUser" Margin="0 15 0 0" FontSize="16" FontFamily="PingFangSC-Regular" Foreground="#fff" HorizontalAlignment="Left">
+                        alex@gmail.com
+                    </TextBlock>
+
+                    <TextBlock x:Name="loginDate" Margin="0 15 0 0" FontSize="16" FontFamily="PingFangSC-Regular" Foreground="#fff" HorizontalAlignment="Left">
+                        2019-11-02 20:30:14
+                    </TextBlock>
+                </StackPanel>
+            </DockPanel>
+
+            <TextBlock FontSize="16" Foreground="#484967" Margin="0 45 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Hyperlink Click="onBindInviteCodeHyperlink_Click">绑定邀请码</Hyperlink>
             </TextBlock>
 
-            <TextBlock x:Name="loginDate" Margin="0 14 0 0" FontSize="16" FontFamily="PingFangSC-Regular" Foreground="#fff" HorizontalAlignment="Center">
-                2019-11-02 20:30:14
+            <TextBlock FontSize="16" Foreground="#484967" Margin="0 15 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Hyperlink Click="onOfficialWebsiteHyperlink_Click">官方网站</Hyperlink>
+            </TextBlock>
+
+            <TextBlock FontSize="16" Foreground="#484967" Margin="0 15 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Hyperlink Click="onGoodWebsiteHyperlink_Click">福利导航</Hyperlink>
             </TextBlock>
 
             <Button Click="onLogoutButton_Click">
@@ -27,7 +43,7 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
-                                    <StackPanel Height="68" Width="407" Margin="0 67 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <StackPanel Height="68" Width="407" Margin="0 40 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <StackPanel.Background>
                                             <ImageBrush ImageSource="/Resources/btn_bg.png" />
                                         </StackPanel.Background>

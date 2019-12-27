@@ -95,7 +95,7 @@ namespace Shadowsocks
                     }
                 }
                 */
-                _controller.ShowLoginScreen();
+                _controller.ShowMainScreen();
             }
 #if !DEBUG
             Reg.SetUrlProtocol(@"ssr");

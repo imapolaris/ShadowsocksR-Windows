@@ -109,9 +109,43 @@ namespace Shadowsocks.NewView
 
             mePage = new MePage();
             mePage.CloseMainScreenEvent += MePage_CloseMainScreenEvent;
+            mePage.BindInviteCodeEvent += MePage_BindInviteCodeEvent;
+            mePage.VisitOfficialWebsiteEvent += MePage_VisitOfficialWebsiteEvent;
+            mePage.VisitGoodWebsiteEvent += MePage_VisitGoodWebsiteEvent;
 
             speedPage = new SpeedPage(_controller);
             mainFrame.Navigate(speedPage);
+        }
+
+        private void MePage_VisitGoodWebsiteEvent(object sender, EventArgs e)
+        {
+            VisitWebsite(@"https://www.360.com");
+        }
+
+        private void MePage_VisitOfficialWebsiteEvent(object sender, EventArgs e)
+        {
+            VisitWebsite(@"https://www.361.com");
+        }
+
+        private void MePage_BindInviteCodeEvent(object sender, EventArgs e)
+        {
+            VisitWebsite(@"https://www.365.com");
+        }
+
+        private void VisitWebsite(string url)
+        {
+            try
+            {
+                Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(@"http\shell\open\command\");
+                string s = key.GetValue("").ToString();
+                int blank = s.IndexOf("\" ");
+                System.Diagnostics.Process.Start(s.Substring(0, blank + 1), url);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("无法访问！", "提示", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void MePage_CloseMainScreenEvent(object sender, EventArgs e)

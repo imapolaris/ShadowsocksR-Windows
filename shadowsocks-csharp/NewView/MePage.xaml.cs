@@ -2,6 +2,7 @@
 using Shadowsocks.NewModel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,6 +22,9 @@ namespace Shadowsocks.NewView
     public partial class MePage : Page
     {
         public event EventHandler CloseMainScreenEvent;
+        public event EventHandler BindInviteCodeEvent;
+        public event EventHandler VisitOfficialWebsiteEvent;
+        public event EventHandler VisitGoodWebsiteEvent;
 
         public MePage()
         {
@@ -36,6 +40,21 @@ namespace Shadowsocks.NewView
         {
             this.loginDate.Text = CurrentUser.LoginDateStr;
             this.loginUser.Text = CurrentUser.Email;
+        }
+
+        private void onBindInviteCodeHyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            BindInviteCodeEvent?.Invoke(default, default);
+        }
+
+        private void onOfficialWebsiteHyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            VisitOfficialWebsiteEvent?.Invoke(default, default);
+        }
+
+        private void onGoodWebsiteHyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            VisitGoodWebsiteEvent?.Invoke(default, default);
         }
     }
 }
