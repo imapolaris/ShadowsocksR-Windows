@@ -166,24 +166,32 @@ namespace Shadowsocks.NewView
             }
             else
             {
-                var res = register(email, pwd);
-                if (res != null)
+                try
                 {
-                    JObject jObject = JObject.Parse(res);
-                    int ret = (int)jObject["ret"];
-                    if (ret == 1)
+                    var res = register(email, pwd);
+                    if (res != null)
                     {
-                        MessageBox.Show("注册成功！正在进入登录界面", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                        JObject jObject = JObject.Parse(res);
+                        int ret = (int)jObject["code"];
+                        if (ret == 200)
+                        {
+                            MessageBox.Show("注册成功！正在进入登录界面", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                        onToLoginButton_Click(null, null);
+                            onToLoginButton_Click(null, null);
+                        }
+                        else
+                        {
+                            MessageBox.Show("注册失败！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
                     else
                     {
                         MessageBox.Show("注册失败！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
-                else
+                catch (Exception ex)
                 {
+                    Console.WriteLine(ex.Message);
                     MessageBox.Show("注册失败！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
