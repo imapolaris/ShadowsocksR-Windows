@@ -89,6 +89,14 @@ namespace Shadowsocks.NewView
         public static readonly DependencyProperty AutoLoginProperty = DependencyProperty.Register(@"AutoLogin", typeof(bool), typeof(LoginScreen));
 
 
+        public bool LoginAsGuest
+        {
+            get => (bool)GetValue(LoginAsGuestProperty);
+            set => SetValue(LoginAsGuestProperty, value);
+        }
+        public static readonly DependencyProperty LoginAsGuestProperty = DependencyProperty.Register(@"LoginAsGuest", typeof(bool), typeof(LoginScreen));
+
+
         public LoginScreen(ShadowsocksController controller)
         {
             InitializeComponent();
@@ -98,6 +106,7 @@ namespace Shadowsocks.NewView
             this.DataContext = this;
 
             this.IsLogin = true;
+            this.LoginAsGuest = false;
             this.IsRegister = false;
             this.ScreenTitle = "邮箱登录";
             this.LoginButtonTitle = "登录";
@@ -116,6 +125,46 @@ namespace Shadowsocks.NewView
             bool rememberMe = this.RememberPassword;
             bool isLogin = this.IsLogin;
 
+            if (this.LoginAsGuest)
+            {
+                try
+                {
+                    var res = loginAsGuest();
+                    if (res != null)
+                    {
+                        JObject jObject = JObject.Parse(res);
+                        int ret = (int)jObject["ret"];
+                        if (ret == 1)
+                        {
+                            JObject data = jObject["data"] as JObject;
+                            CurrentUser.IsLogined = true;
+                            CurrentUser.User_Id = (string)data["user_id"];
+                            CurrentUser.Token = (string)data["token"];
+                            CurrentUser.LoginDate = DateTime.Now;
+                            CurrentUser.Email = Email;
+
+                            // 登录成功
+                            Close();
+                            _controller?.ShowMainScreen();
+                        }
+                        else
+                        {
+                            MessageBox.Show("登录失败！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("登录失败！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    MessageBox.Show("登录失败！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+                return;
+            }
             // MessageBox.Show("" + email + ":" + pwd + ", " + autoLogin.ToString() + ", " + rememberMe.ToString() + ", " + isLogin.ToString());
             if (isLogin)
             {
@@ -205,6 +254,14 @@ namespace Shadowsocks.NewView
             return WebHelper.Post(url, json);
         }
 
+        // 游客登录
+        private string loginAsGuest()
+        {
+            string url = "http://ss.yam.im/api/guest/token";
+            string json = "{" + "\"device_id\":" + "0" + "}";
+            return WebHelper.Post(url, json);
+        }
+
         // 注册
         private string register(string email, string pwd)
         {
@@ -235,6 +292,8 @@ namespace Shadowsocks.NewView
             IsRegister = true;
             this.ScreenTitle = "邮箱注册";
             this.LoginButtonTitle = "注册";
+
+            this.LoginAsGuest = false;
         }
 
         private void onMiniButton_Click(object sender, RoutedEventArgs e)
@@ -350,6 +409,38 @@ namespace Shadowsocks.NewView
             if (!this.RememberPassword)
             {
                 this.AutoLogin = false;
+            }
+        }
+
+        private void loginAsGuestCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (this.LoginAsGuest)
+            {
+                this.ScreenTitle = "游客登录";
+                this.Email = "Guest";
+                this.Password = "12345678";
+
+                this.rememberPwd.Visibility = Visibility.Collapsed;
+                this.autoLogin.Visibility = Visibility.Collapsed;
+
+                this.emailText.IsEnabled = false;
+                this.pwdText.IsEnabled = false;
+            }
+        }
+
+        private void loginAsGuestCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (!this.LoginAsGuest)
+            {
+                this.ScreenTitle = "邮箱登录";
+                this.Email = "";
+                this.Password = "";
+
+                this.rememberPwd.Visibility = Visibility.Visible;
+                this.autoLogin.Visibility = Visibility.Visible;
+
+                this.emailText.IsEnabled = true;
+                this.pwdText.IsEnabled = true;
             }
         }
     }
