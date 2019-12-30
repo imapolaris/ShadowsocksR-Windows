@@ -109,12 +109,18 @@ namespace Shadowsocks.NewView
 
             mePage = new MePage();
             mePage.CloseMainScreenEvent += MePage_CloseMainScreenEvent;
+            mePage.ShareQRCodeEvent += MePage_ShareQRCodeEvent;
             mePage.BindInviteCodeEvent += MePage_BindInviteCodeEvent;
             mePage.VisitOfficialWebsiteEvent += MePage_VisitOfficialWebsiteEvent;
             mePage.VisitGoodWebsiteEvent += MePage_VisitGoodWebsiteEvent;
 
             speedPage = new SpeedPage(_controller);
             mainFrame.Navigate(speedPage);
+        }
+
+        private void MePage_ShareQRCodeEvent(object sender, EventArgs e)
+        {
+            
         }
 
         private void MePage_VisitGoodWebsiteEvent(object sender, EventArgs e)

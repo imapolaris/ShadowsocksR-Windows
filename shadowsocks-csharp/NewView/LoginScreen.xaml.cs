@@ -250,7 +250,7 @@ namespace Shadowsocks.NewView
         private string login(string email, string pwd)
         {
             string url = "http://ss.yam.im/api/token";
-            string json = "{" + "\"email\":\"" + email + "\", \"passwd\":\"" + pwd + "\"}";
+            string json = "{" + "\"email\":\"" + email + "\", \"passwd\":\"" + pwd + "\"," +"\"device_id\":" + "32231" + "}";
             return WebHelper.Post(url, json);
         }
 
@@ -258,7 +258,7 @@ namespace Shadowsocks.NewView
         private string loginAsGuest()
         {
             string url = "http://ss.yam.im/api/guest/token";
-            string json = "{" + "\"device_id\":" + "0" + "}";
+            string json = "{" + "\"device_id\":" + "32231" + "}";
             return WebHelper.Post(url, json);
         }
 

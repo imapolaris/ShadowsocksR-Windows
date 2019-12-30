@@ -22,6 +22,7 @@ namespace Shadowsocks.NewView
     public partial class MePage : Page
     {
         public event EventHandler CloseMainScreenEvent;
+        public event EventHandler ShareQRCodeEvent;
         public event EventHandler BindInviteCodeEvent;
         public event EventHandler VisitOfficialWebsiteEvent;
         public event EventHandler VisitGoodWebsiteEvent;
@@ -40,6 +41,11 @@ namespace Shadowsocks.NewView
         {
             this.loginDate.Text = CurrentUser.LoginDateStr;
             this.loginUser.Text = CurrentUser.Email;
+        }
+
+        private void onShareQRCodeEventHyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            ShareQRCodeEvent?.Invoke(default, default);
         }
 
         private void onBindInviteCodeHyperlink_Click(object sender, RoutedEventArgs e)
