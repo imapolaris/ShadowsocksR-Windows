@@ -128,12 +128,7 @@ namespace Shadowsocks.NewView
             try
             {
                 string url = "http://ss.yam.im/api/url/Business?access_token=" + CurrentUser.Token;
-                var res = WebHelper.Get(url, null);
-                if (res != null)
-                {
-                    var path = "business.html";
-                    VisitWebsite2(res, path);
-                }
+                VisitWebsite(url);
             }
             catch (Exception ex)
             {
@@ -146,12 +141,7 @@ namespace Shadowsocks.NewView
             try
             {
                 string url = "http://ss.yam.im/api/url/OnlineSupport?access_token=" + CurrentUser.Token;
-                var res = WebHelper.Get(url, null);
-                if (res != null)
-                {
-                    var path = "onlineSupport.html";
-                    VisitWebsite2(res, path);
-                }
+                VisitWebsite(url);
             }
             catch (Exception ex)
             {
@@ -164,12 +154,7 @@ namespace Shadowsocks.NewView
             try
             {
                 string url = "http://ss.yam.im/api/url/Ticket?access_token=" + CurrentUser.Token;
-                var res = WebHelper.Get(url, null);
-                if (res != null)
-                {
-                    var path = "ticket.html";
-                    VisitWebsite2(res, path);
-                }
+                VisitWebsite(url);
             }
             catch (Exception ex)
             {
@@ -187,12 +172,7 @@ namespace Shadowsocks.NewView
             try
             {
                 string url = "http://ss.yam.im/api/url/Navigation?access_token=" + CurrentUser.Token;
-                var res = WebHelper.Get(url, null);
-                if (res != null)
-                {
-                    var path = "visitGoodWebsite.html";
-                    VisitWebsite2(res, path);
-                }
+                VisitWebsite(url);
             }
             catch (Exception ex)
             {
@@ -205,12 +185,7 @@ namespace Shadowsocks.NewView
             try
             {
                 string url = "http://ss.yam.im/api/url/Website?access_token=" + CurrentUser.Token;
-                var res = WebHelper.Get(url, null);
-                if (res != null)
-                {
-                    var path = "visitWebsite.html";
-                    VisitWebsite2(res, path);
-                }
+                VisitWebsite(url);
             }
             catch (Exception ex)
             {
@@ -237,22 +212,6 @@ namespace Shadowsocks.NewView
                 Console.WriteLine(ex.Message);
                 MessageBox.Show("无法访问！", "提示", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-        }
-
-        private void VisitWebsite2(string content, string path)
-        {
-            FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
-            StreamWriter sw = new StreamWriter(fs);
-            //开始写入
-            sw.Write(content);
-            //清空缓冲区
-            sw.Flush();
-            //关闭流
-            sw.Close();
-            fs.Close();
-
-
-            VisitWebsite("file:///" + System.IO.Path.GetFullPath(path));
         }
 
         private void MePage_CloseMainScreenEvent(object sender, EventArgs e)
