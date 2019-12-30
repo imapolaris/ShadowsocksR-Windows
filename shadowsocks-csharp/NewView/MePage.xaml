@@ -11,7 +11,7 @@
 
     <Grid>
         <StackPanel HorizontalAlignment="Center">
-            <DockPanel Margin="0 55 0 0" HorizontalAlignment="Center">
+            <DockPanel Margin="0 45 0 0" HorizontalAlignment="Center">
                 <Image Source="/Resources/me_logo.png" Height="75" Width="75" />
 
                 <StackPanel Margin="25 0 0 0" VerticalAlignment="Center">
@@ -30,11 +30,11 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock FontSize="16" Foreground="#484967" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock FontSize="14" Foreground="#484967" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Hyperlink Click="onShareQRCodeEventHyperlink_Click">分享二维码</Hyperlink>
                 </TextBlock>
                 
-                <TextBlock Grid.Column="1" FontSize="16" Foreground="#484967" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Grid.Column="1" FontSize="14" Foreground="#484967" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Hyperlink Click="onBindInviteCodeHyperlink_Click">绑定邀请码</Hyperlink>
                 </TextBlock>
             </Grid>
@@ -44,12 +44,40 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock FontSize="16" Foreground="#484967" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock FontSize="14" Foreground="#484967" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Hyperlink Click="onOfficialWebsiteHyperlink_Click">官方网站</Hyperlink>
                 </TextBlock>
 
-                <TextBlock Grid.Column="1" FontSize="16" Foreground="#484967" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Grid.Column="1" FontSize="14" Foreground="#484967" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Hyperlink Click="onGoodWebsiteHyperlink_Click">福利导航</Hyperlink>
+                </TextBlock>
+            </Grid>
+
+            <Grid HorizontalAlignment="Center" Width="350" Margin="0 15 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock FontSize="14" Foreground="#484967" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Hyperlink Click="onFeedbackHyperlink_Click">问题反馈</Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Column="1" FontSize="14" Foreground="#484967" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Hyperlink Click="onOnlineSupportHyperlink_Click">在线支持</Hyperlink>
+                </TextBlock>
+            </Grid>
+
+            <Grid HorizontalAlignment="Center" Width="350" Margin="0 15 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock FontSize="14" Foreground="#484967" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Hyperlink Click="onBusinessHyperlink_Click">商务合作</Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Column="1" FontSize="14" Foreground="#484967" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Hyperlink></Hyperlink>
                 </TextBlock>
             </Grid>
 

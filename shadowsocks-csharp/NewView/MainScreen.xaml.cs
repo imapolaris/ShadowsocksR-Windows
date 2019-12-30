@@ -1,6 +1,8 @@
 ﻿using Shadowsocks.Controller;
+using Shadowsocks.NewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -113,9 +115,66 @@ namespace Shadowsocks.NewView
             mePage.BindInviteCodeEvent += MePage_BindInviteCodeEvent;
             mePage.VisitOfficialWebsiteEvent += MePage_VisitOfficialWebsiteEvent;
             mePage.VisitGoodWebsiteEvent += MePage_VisitGoodWebsiteEvent;
+            mePage.FeedbackEvent += MePage_FeedbackEvent;
+            mePage.OnlineSupportEvent += MePage_OnlineSupportEvent;
+            mePage.BusinessEvent += MePage_BusinessEvent;
 
             speedPage = new SpeedPage(_controller);
             mainFrame.Navigate(speedPage);
+        }
+
+        private void MePage_BusinessEvent(object sender, EventArgs e)
+        {
+            try
+            {
+                string url = "http://ss.yam.im/api/url/Business?access_token=" + CurrentUser.Token;
+                var res = WebHelper.Get(url, null);
+                if (res != null)
+                {
+                    var path = "business.html";
+                    VisitWebsite2(res, path);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void MePage_OnlineSupportEvent(object sender, EventArgs e)
+        {
+            try
+            {
+                string url = "http://ss.yam.im/api/url/OnlineSupport?access_token=" + CurrentUser.Token;
+                var res = WebHelper.Get(url, null);
+                if (res != null)
+                {
+                    var path = "onlineSupport.html";
+                    VisitWebsite2(res, path);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void MePage_FeedbackEvent(object sender, EventArgs e)
+        {
+            try
+            {
+                string url = "http://ss.yam.im/api/url/Ticket?access_token=" + CurrentUser.Token;
+                var res = WebHelper.Get(url, null);
+                if (res != null)
+                {
+                    var path = "ticket.html";
+                    VisitWebsite2(res, path);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void MePage_ShareQRCodeEvent(object sender, EventArgs e)
@@ -125,12 +184,38 @@ namespace Shadowsocks.NewView
 
         private void MePage_VisitGoodWebsiteEvent(object sender, EventArgs e)
         {
-            VisitWebsite(@"https://www.360.com");
+            try
+            {
+                string url = "http://ss.yam.im/api/url/Navigation?access_token=" + CurrentUser.Token;
+                var res = WebHelper.Get(url, null);
+                if (res != null)
+                {
+                    var path = "visitGoodWebsite.html";
+                    VisitWebsite2(res, path);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void MePage_VisitOfficialWebsiteEvent(object sender, EventArgs e)
         {
-            VisitWebsite(@"https://www.361.com");
+            try
+            {
+                string url = "http://ss.yam.im/api/url/Website?access_token=" + CurrentUser.Token;
+                var res = WebHelper.Get(url, null);
+                if (res != null)
+                {
+                    var path = "visitWebsite.html";
+                    VisitWebsite2(res, path);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void MePage_BindInviteCodeEvent(object sender, EventArgs e)
@@ -152,6 +237,22 @@ namespace Shadowsocks.NewView
                 Console.WriteLine(ex.Message);
                 MessageBox.Show("无法访问！", "提示", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+
+        private void VisitWebsite2(string content, string path)
+        {
+            FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
+            StreamWriter sw = new StreamWriter(fs);
+            //开始写入
+            sw.Write(content);
+            //清空缓冲区
+            sw.Flush();
+            //关闭流
+            sw.Close();
+            fs.Close();
+
+
+            VisitWebsite("file:///" + System.IO.Path.GetFullPath(path));
         }
 
         private void MePage_CloseMainScreenEvent(object sender, EventArgs e)

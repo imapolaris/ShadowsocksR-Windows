@@ -26,6 +26,9 @@ namespace Shadowsocks.NewView
         public event EventHandler BindInviteCodeEvent;
         public event EventHandler VisitOfficialWebsiteEvent;
         public event EventHandler VisitGoodWebsiteEvent;
+        public event EventHandler FeedbackEvent;
+        public event EventHandler OnlineSupportEvent;
+        public event EventHandler BusinessEvent;
 
         public MePage()
         {
@@ -61,6 +64,21 @@ namespace Shadowsocks.NewView
         private void onGoodWebsiteHyperlink_Click(object sender, RoutedEventArgs e)
         {
             VisitGoodWebsiteEvent?.Invoke(default, default);
+        }
+
+        private void onFeedbackHyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            FeedbackEvent?.Invoke(default, default);
+        }
+
+        private void onOnlineSupportHyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            OnlineSupportEvent?.Invoke(default, default);
+        }
+
+        private void onBusinessHyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            BusinessEvent?.Invoke(default, default);
         }
     }
 }
