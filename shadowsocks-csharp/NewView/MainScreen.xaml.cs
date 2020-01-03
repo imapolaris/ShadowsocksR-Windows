@@ -164,7 +164,8 @@ namespace Shadowsocks.NewView
 
         private void MePage_ShareQRCodeEvent(object sender, EventArgs e)
         {
-            
+            QRCodeScreen screen = new QRCodeScreen();
+            screen.ShowDialog();
         }
 
         private void MePage_VisitGoodWebsiteEvent(object sender, EventArgs e)
