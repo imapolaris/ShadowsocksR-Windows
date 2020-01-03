@@ -196,7 +196,8 @@ namespace Shadowsocks.NewView
 
         private void MePage_BindInviteCodeEvent(object sender, EventArgs e)
         {
-            VisitWebsite(@"https://www.365.com");
+            SetInvitationCode wnd = new SetInvitationCode();
+            wnd.ShowDialog();
         }
 
         private void VisitWebsite(string url)
