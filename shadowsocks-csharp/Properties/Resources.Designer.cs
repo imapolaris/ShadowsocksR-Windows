@@ -261,9 +261,29 @@ namespace Shadowsocks.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap pay_bg {
+            get {
+                object obj = ResourceManager.GetObject("pay_bg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap pay_disable {
             get {
                 object obj = ResourceManager.GetObject("pay_disable", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap pay_submit {
+            get {
+                object obj = ResourceManager.GetObject("pay_submit", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

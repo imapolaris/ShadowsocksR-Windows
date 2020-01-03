@@ -45,7 +45,9 @@
     <None Remove="Resources\me_logo.png" />
     <None Remove="Resources\mini.png" />
     <None Remove="Resources\pay.png" />
+    <None Remove="Resources\pay_bg.png" />
     <None Remove="Resources\pay_disable.png" />
+    <None Remove="Resources\pay_submit.png" />
     <None Remove="Resources\right_arrow.png" />
     <None Remove="Resources\speed.png" />
     <None Remove="Resources\speed_disable.png" />
@@ -77,7 +79,9 @@
     <Resource Include="Resources\me_logo.png" />
     <Resource Include="Resources\mini.png" />
     <Resource Include="Resources\pay.png" />
+    <Resource Include="Resources\pay_bg.png" />
     <Resource Include="Resources\pay_disable.png" />
+    <Resource Include="Resources\pay_submit.png" />
     <Resource Include="Resources\right_arrow.png" />
     <Resource Include="Resources\speed.png" />
     <Resource Include="Resources\speed_disable.png" />
