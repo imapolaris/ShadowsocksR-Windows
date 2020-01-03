@@ -37,7 +37,7 @@
                                                                 <ControlTemplate TargetType="Button">
                                                                     <Border Width="115" Height="136" Margin="0 0 22 0" Background="{Binding Path=ItemBackground, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                                             BorderBrush="#36364D" BorderThickness="1">
-                                                                        <StackPanel HorizontalAlignment="Center">
+                                                                        <StackPanel HorizontalAlignment="Center" Width="115" Height="136" Background="Transparent">
                                                                             <TextBlock Foreground="#fff" FontSize="15" Margin="0 25 0 0" HorizontalAlignment="Center" Text="{Binding Path=Name}"></TextBlock>
                                                                             <TextBlock Foreground="#fff" FontSize="22" FontWeight="Bold" Margin="0 21 0 0" HorizontalAlignment="Center" Text="{Binding Path=PriceText}"></TextBlock>
                                                                         </StackPanel>
