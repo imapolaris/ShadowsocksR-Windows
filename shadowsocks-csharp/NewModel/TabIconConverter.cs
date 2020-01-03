@@ -36,7 +36,7 @@ namespace Shadowsocks.NewModel
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             int tabIndex = (int)value;
-            if (tabIndex == 1)
+            if (tabIndex == 2)
             {
                 Uri uri = new Uri("pack://application:,,,/Resources/me.png", UriKind.Absolute);
                 return new BitmapImage(uri);
@@ -44,6 +44,29 @@ namespace Shadowsocks.NewModel
             else
             {
                 Uri uri = new Uri("pack://application:,,,/Resources/me_disable.png", UriKind.Absolute);
+                return new BitmapImage(uri);
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    class PayTabIconConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            int tabIndex = (int)value;
+            if (tabIndex == 1)
+            {
+                Uri uri = new Uri("pack://application:,,,/Resources/pay.png", UriKind.Absolute);
+                return new BitmapImage(uri);
+            }
+            else
+            {
+                Uri uri = new Uri("pack://application:,,,/Resources/pay_disable.png", UriKind.Absolute);
                 return new BitmapImage(uri);
             }
         }

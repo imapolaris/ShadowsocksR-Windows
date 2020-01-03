@@ -249,6 +249,26 @@ namespace Shadowsocks.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap pay {
+            get {
+                object obj = ResourceManager.GetObject("pay", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap pay_disable {
+            get {
+                object obj = ResourceManager.GetObject("pay_disable", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 listen-address __PRIVOXY_BIND_IP__:__PRIVOXY_BIND_PORT__
         ///toggle 0
         ///logfile ShadowsocksR.log

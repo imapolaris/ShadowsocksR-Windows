@@ -13,6 +13,7 @@
     <Window.Resources>
         <converter:SpeedTabIconConverter x:Key="speedTabIconConverter" />
         <converter:MeTabIconConverter x:Key="meTabIconConverter" />
+        <converter:PayTabIconConverter x:Key="payTabIconConverter" />
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -41,6 +42,33 @@
                                             <Image Source="{Binding TabIndex, Converter={StaticResource speedTabIconConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="25" Height="30" Margin="25 0 0 0"  />
                                             <TextBlock Foreground="{TemplateBinding Button.Foreground}" FontSize="14" VerticalAlignment="Center" Margin="18 0 0 0">
                                                 加速
+                                            </TextBlock>
+                                        </StackPanel>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Opacity" Value="0.6"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Opacity" Value="0.8"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Click="onPayButton_Click" Background="{Binding PayTabBackground, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Foreground="{Binding PayTabForeground, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <StackPanel Orientation="Horizontal" Width="120" Height="65" Background="{TemplateBinding Background}">
+                                            <Image Source="{Binding TabIndex, Converter={StaticResource payTabIconConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="25" Height="30" Margin="25 0 0 0"  />
+                                            <TextBlock Foreground="{TemplateBinding Button.Foreground}" FontSize="14" VerticalAlignment="Center" Margin="18 0 0 0">
+                                                充值
                                             </TextBlock>
                                         </StackPanel>
                                         <ControlTemplate.Triggers>

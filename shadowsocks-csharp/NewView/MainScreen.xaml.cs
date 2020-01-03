@@ -55,6 +55,22 @@ namespace Shadowsocks.NewView
         }
         public static readonly DependencyProperty MeTabForegroundProperty = DependencyProperty.Register(@"MeTabForeground", typeof(Brush), typeof(MainScreen));
 
+        public Brush PayTabBackground
+        {
+            get => GetValue(PayTabBackgroundProperty) as Brush;
+            set => SetValue(PayTabBackgroundProperty, value);
+        }
+        public static readonly DependencyProperty PayTabBackgroundProperty = DependencyProperty.Register(@"PayTabBackground", typeof(Brush), typeof(MainScreen));
+
+
+        public Brush PayTabForeground
+        {
+            get => GetValue(PayTabForegroundProperty) as Brush;
+            set => SetValue(PayTabForegroundProperty, value);
+        }
+        public static readonly DependencyProperty PayTabForegroundProperty = DependencyProperty.Register(@"PayTabForeground", typeof(Brush), typeof(MainScreen));
+
+
         public ImageBrush SpeedTabIcon
         {
             get => GetValue(SpeedTabIconProperty) as ImageBrush;
@@ -67,6 +83,13 @@ namespace Shadowsocks.NewView
             set => SetValue(MeTabIconProperty, value);
         }
         public static readonly DependencyProperty MeTabIconProperty = DependencyProperty.Register(@"MeTabIcon", typeof(ImageBrush), typeof(MainScreen));
+
+        public ImageBrush PayTabIcon
+        {
+            get => GetValue(PayTabIconProperty) as ImageBrush;
+            set => SetValue(PayTabIconProperty, value);
+        }
+        public static readonly DependencyProperty PayTabIconProperty = DependencyProperty.Register(@"PayTabIcon", typeof(ImageBrush), typeof(MainScreen));
 
 
         public MainScreen(ShadowsocksController controller)
@@ -89,11 +112,19 @@ namespace Shadowsocks.NewView
 
         private MePage mePage = null;
         private SpeedPage speedPage = null;
+        private PayPage payPage = null;
         private void onMeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.TabIndex = 2;
+            this.onTabChanged(this.TabIndex);
+            mainFrame.Navigate(mePage);
+        }
+
+        private void onPayButton_Click(object sender, RoutedEventArgs e)
         {
             this.TabIndex = 1;
             this.onTabChanged(this.TabIndex);
-            mainFrame.Navigate(mePage);
+            mainFrame.Navigate(payPage);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -118,6 +149,8 @@ namespace Shadowsocks.NewView
             mePage.FeedbackEvent += MePage_FeedbackEvent;
             mePage.OnlineSupportEvent += MePage_OnlineSupportEvent;
             mePage.BusinessEvent += MePage_BusinessEvent;
+
+            payPage = new PayPage();
 
             speedPage = new SpeedPage(_controller);
             mainFrame.Navigate(speedPage);
@@ -236,14 +269,37 @@ namespace Shadowsocks.NewView
 
                 this.SpeedTabIcon = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/Resources/speed.png", UriKind.Absolute)));
                 this.MeTabIcon = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/Resources/me_disable.png", UriKind.Absolute)));
+                this.PayTabIcon = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/Resources/pay_disable.png", UriKind.Absolute)));
+                
 
                 this.MeTabForeground = new SolidColorBrush(Color.FromRgb((byte)138, (byte)137, (byte)154)); // #8A899A
                 this.MeTabBackground = new SolidColorBrush(Color.FromRgb((byte)29, (byte)30, (byte)47)); // #1D1E2F
+                this.PayTabForeground = new SolidColorBrush(Color.FromRgb((byte)138, (byte)137, (byte)154)); // #8A899A
+                this.PayTabBackground = new SolidColorBrush(Color.FromRgb((byte)29, (byte)30, (byte)47)); // #1D1E2F
             } 
             else if (tabIndex == 1)
             {
                 this.SpeedTabForeground = new SolidColorBrush(Color.FromRgb((byte)138, (byte)137, (byte)154)); // #8A899A
                 this.SpeedTabBackground = new SolidColorBrush(Color.FromRgb((byte)29, (byte)30, (byte)47)); // #1D1E2F;
+                this.MeTabForeground = new SolidColorBrush(Color.FromRgb((byte)138, (byte)137, (byte)154)); // #8A899A
+                this.MeTabBackground = new SolidColorBrush(Color.FromRgb((byte)29, (byte)30, (byte)47)); // #1D1E2F;
+
+                this.PayTabForeground = new SolidColorBrush(Color.FromRgb((byte)255, (byte)255, (byte)255));
+                ImageBrush imageBrush = new ImageBrush();
+                Uri uri = new Uri("pack://application:,,,/Resources/tab_bg.png", UriKind.Absolute);
+                imageBrush.ImageSource = new BitmapImage(uri);
+                this.PayTabBackground = imageBrush;
+
+                this.SpeedTabIcon = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/Resources/speed_disable.png", UriKind.Absolute)));
+                this.MeTabIcon = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/Resources/me_disable.png", UriKind.Absolute)));
+                this.PayTabIcon = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/Resources/pay.png", UriKind.Absolute)));
+            }
+            else if (tabIndex == 2)
+            {
+                this.SpeedTabForeground = new SolidColorBrush(Color.FromRgb((byte)138, (byte)137, (byte)154)); // #8A899A
+                this.SpeedTabBackground = new SolidColorBrush(Color.FromRgb((byte)29, (byte)30, (byte)47)); // #1D1E2F;
+                this.PayTabForeground = new SolidColorBrush(Color.FromRgb((byte)138, (byte)137, (byte)154)); // #8A899A
+                this.PayTabBackground = new SolidColorBrush(Color.FromRgb((byte)29, (byte)30, (byte)47)); // #1D1E2F;
 
                 this.MeTabForeground = new SolidColorBrush(Color.FromRgb((byte)255, (byte)255, (byte)255));
                 ImageBrush imageBrush = new ImageBrush();
@@ -253,6 +309,7 @@ namespace Shadowsocks.NewView
 
                 this.SpeedTabIcon = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/Resources/speed_disable.png", UriKind.Absolute)));
                 this.MeTabIcon = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/Resources/me.png", UriKind.Absolute)));
+                this.PayTabIcon = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/Resources/pay_disable.png", UriKind.Absolute)));
             }
         }
 
